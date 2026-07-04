@@ -9,7 +9,7 @@ Cursor Agent Skills：**定稿模块化 PRD 后，自动拆任务并循环实现
 ### 方式 1：npx skills（推荐）
 
 ```bash
-npx skills@latest add srd13367430983/prd-build-loop-skills --agent cursor -y -g
+npx skills@latest add ballmaK/prd-build-loop-skills --agent cursor -y -g
 ```
 
 ### 方式 2：手动复制
