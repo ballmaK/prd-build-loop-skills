@@ -4,8 +4,9 @@
 
 ## PRD
 
-**Macro:** `docs/prd/00-macro-shared.md`
-**Modules:** `docs/prd/modules/`
+**Macro (To-Be):** `docs/prd/00-macro-shared.md`
+**Modules (To-Be):** `docs/prd/modules/`
+**As-Is (brownfield):** `docs/prd/as-is/` (`reverse-signoff.md` fidelity gate)
 
 ## Conventions
 

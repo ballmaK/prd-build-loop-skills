@@ -22,12 +22,18 @@ Verify before starting:
 
 | Check | Path / Action |
 | ----- | ------------- |
-| Macro PRD exists | `docs/prd/00-macro-shared.md` |
-| Module PRDs exist | `docs/prd/modules/M*.md` |
+| Macro PRD exists | `docs/prd/00-macro-shared.md` **or** To-Be/migrate plan (not As-Is alone) |
+| Module PRDs exist | `docs/prd/modules/M*.md` (or migrate task plan agreed with user) |
 | User confirmed finalized | Ask once if not stated |
 | Git clean or committed | Recommend commit before loop |
 
-If missing, **STOP** and tell user to finish PRD first.
+If only `docs/prd/as-is/` exists (reverse output) and there is **no** To-Be / migrate plan:
+
+1. **STOP** — As-Is is fidelity documentation, not an implementation backlog.
+2. Tell the user to finish characterization + To-Be/gap/migrate planning first.
+3. Point to **`/prd-reverse`** if As-Is is missing or unsigned.
+
+If greenfield PRD files are missing entirely, **STOP** and tell user to finish PRD first (or run reverse/author skills).
 
 ---
 

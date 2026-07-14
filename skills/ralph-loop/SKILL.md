@@ -8,7 +8,11 @@ disable-model-invocation: true
 
 ## Cursor mode
 
-Invoke **`prd-build-loop`** or **`prd-build-loop continue`** in new Agent sessions.
+Brownfield without As-Is docs → run **`/prd-reverse`** first.
+
+As-Is only (no To-Be/migrate plan) → do **not** start build-loop yet.
+
+Then invoke **`prd-build-loop`** or **`prd-build-loop continue`** in new Agent sessions.
 
 Optional semi-attended harness:
 
