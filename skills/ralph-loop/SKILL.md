@@ -8,7 +8,9 @@ disable-model-invocation: true
 
 ## Cursor mode
 
-Invoke **`prd-build-loop`** or **`prd-build-loop continue`** in new Agent sessions.
+If PRD is not grill-approved yet, run **`/prd-grill`** first.
+
+Then invoke **`prd-build-loop`** or **`prd-build-loop continue`** in new Agent sessions.
 
 Optional semi-attended harness:
 

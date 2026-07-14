@@ -6,6 +6,7 @@
 
 **Macro:** `docs/prd/00-macro-shared.md`
 **Modules:** `docs/prd/modules/`
+**Grill sign-off:** `docs/prd/grill-signoff.md` (`status: approved` required before build loop)
 
 ## Conventions
 

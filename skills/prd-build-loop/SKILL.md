@@ -1,18 +1,19 @@
 ---
 name: prd-build-loop
 description: >-
-  After finalized modular PRD in docs/prd/, convert to Ralph implementation plan
-  and autonomously execute all tasks until complete. Combines setup-matt-pocock-skills,
-  to-issues, ralph-init, ralph-implement, and tdd. Use when user says PRD is finalized,
-  /prd-build-loop, or wants to implement entire PRD automatically.
+  After finalized modular PRD in docs/prd/ (post /prd-grill), convert to Ralph
+  implementation plan and autonomously execute all tasks until complete. Combines
+  setup-matt-pocock-skills, prd-grill, to-issues, ralph-init, ralph-implement, and
+  tdd. Use when user says PRD is finalized, /prd-build-loop, or wants to implement
+  entire PRD automatically.
 disable-model-invocation: true
 ---
 
 # PRD Build Loop
 
-> **Trigger:** User has **finalized** modular PRD under `docs/prd/` and wants all tasks implemented autonomously.
+> **Trigger:** User has **finalized** modular PRD under `docs/prd/` (after `/prd-grill`) and wants all tasks implemented autonomously.
 
-Orchestrates: `setup-matt-pocock-skills` → PRD→Plan → `ralph-implement` × N → done.
+Orchestrates: `prd-grill` (gate) → `setup-matt-pocock-skills` → PRD→Plan → `ralph-implement` × N → done.
 
 ---
 
@@ -24,10 +25,22 @@ Verify before starting:
 | ----- | ------------- |
 | Macro PRD exists | `docs/prd/00-macro-shared.md` |
 | Module PRDs exist | `docs/prd/modules/M*.md` |
+| Grill sign-off approved | `docs/prd/grill-signoff.md` with `status: approved` |
 | User confirmed finalized | Ask once if not stated |
 | Git clean or committed | Recommend commit before loop |
 
-If missing, **STOP** and tell user to finish PRD first.
+If PRD files are missing, **STOP** and tell user to finish PRD first.
+
+### Phase 0.5 — PRD grill gate
+
+If `docs/prd/grill-signoff.md` is missing, or `status` is not `approved`:
+
+1. **STOP** implementation and plan generation.
+2. Tell the user to run **`/prd-grill`** (grill-me / `grilling` discipline on this PRD).
+3. Optionally start `/prd-grill` in this session if the user asks to grill now.
+4. After sign-off is `approved`, continue from Phase 1 (or `/prd-build-loop continue`).
+
+Skip this gate only when the user explicitly says `skip grill` / `force build` (log that choice in `.ralph-logs/session.log`).
 
 ---
 
