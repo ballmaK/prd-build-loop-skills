@@ -1,10 +1,15 @@
 # prd-build-loop-skills
 
-Cursor Agent Skills：**挑战并定稿模块化 PRD 后，自动拆任务并循环实现直到完成**。
+Cursor Agent Skills：**从想法生成模块化 PRD，挑战定稿后，自动拆任务并循环实现直到完成**。
 
-组合 [mattpocock/skills](https://github.com/mattpocock/skills)（setup、**grill-me / grilling**、to-issues、tdd、handoff）与 [ralph-loop-skills](https://github.com/tradesdontlie/ralph-loop-skills) 方法论。
+组合 [mattpocock/skills](https://github.com/mattpocock/skills)（setup、**grill-with-docs / grilling / domain-modeling / to-spec**、to-issues、tdd、handoff）与 [ralph-loop-skills](https://github.com/tradesdontlie/ralph-loop-skills) 方法论。
 
-实现前用 **`/prd-grill`**（参考 `grill-me`）挑战模块化 PRD，通过后才进入 `/prd-build-loop`。
+完整链路：
+
+```
+/prd-author  →  /prd-grill  →  /prd-build-loop
+ (生成 PRD)     (成品挑战)      (拆任务+实现)
+```
 
 ## 安装
 
@@ -18,7 +23,7 @@ npx skills@latest add ballmaK/prd-build-loop-skills --agent cursor -y -g
 
 ```bash
 # 编排 skill → 目标项目
-cp -r skills/prd-grill skills/prd-build-loop /path/to/project/.cursor/skills/
+cp -r skills/prd-author skills/prd-grill skills/prd-build-loop /path/to/project/.cursor/skills/
 
 # Ralph 辅助 skill → 全局
 cp -r skills/ralph-* ~/.agents/skills/
@@ -28,15 +33,23 @@ cp -r skills/ralph-* ~/.agents/skills/
 
 ```bash
 npx skills@latest add mattpocock/skills \
-  --skill setup-matt-pocock-skills --skill to-issues --skill tdd \
-  --skill domain-modeling --skill handoff --skill grilling --skill grill-me \
+  --skill setup-matt-pocock-skills --skill grill-with-docs --skill grilling \
+  --skill domain-modeling --skill to-spec --skill to-issues --skill tdd \
+  --skill handoff --skill grill-me \
   --agent cursor -y -g
 ```
 
 ## 使用
 
-1. 在目标项目准备好模块化 PRD：`docs/prd/00-macro-shared.md` + `docs/prd/modules/*.md`
-2. 先挑战 PRD（参考 grill-me）：
+### A. 还没有 PRD（从想法开始）
+
+```
+/prd-author
+```
+
+产出：`docs/prd/00-macro-shared.md` + `docs/prd/modules/*.md` + draft `grill-signoff.md`，并维护 `CONTEXT.md` / ADR。
+
+### B. 已有模块化 PRD → 成品挑战
 
 ```
 /prd-grill
@@ -44,8 +57,9 @@ npx skills@latest add mattpocock/skills \
 
 通过后写入 `docs/prd/grill-signoff.md`（`status: approved`）。
 
-3. 将 `templates/` 中的 Ralph 脚手架复制到项目根目录（或让 skill 自动生成）
-4. 在 Cursor Agent 运行：
+### C. 挑战通过 → 自动实现
+
+将 `templates/` 中的 Ralph 脚手架复制到项目根目录（或让 skill 自动生成），然后：
 
 ```
 /prd-build-loop
@@ -61,7 +75,8 @@ npx skills@latest add mattpocock/skills \
 
 | Skill | 说明 |
 | ----- | ---- |
-| `prd-grill` | **PRD 挑战门**：按 grill-me / grilling 纪律挑战模块化 PRD，产出 sign-off |
+| `prd-author` | **PRD 生成**：grill-with-docs → 合成模块化 `docs/prd/` |
+| `prd-grill` | **PRD 挑战门**：对已有 PRD 再拷问，产出 sign-off |
 | `prd-build-loop` | **主编排**：grill 通过后 PRD → active-plan → 循环实现 |
 | `ralph-init` | 初始化 specs/、prompts/、ralph.sh |
 | `ralph-implement` | 单次执行一个 checkbox 任务 |

@@ -1,11 +1,12 @@
 ---
 name: prd-build-loop
 description: >-
-  After finalized modular PRD in docs/prd/ (post /prd-grill), convert to Ralph
-  implementation plan and autonomously execute all tasks until complete. Combines
-  setup-matt-pocock-skills, prd-grill, to-issues, ralph-init, ralph-implement, and
-  tdd. Use when user says PRD is finalized, /prd-build-loop, or wants to implement
-  entire PRD automatically.
+  After finalized modular PRD in docs/prd/ (from /prd-author then /prd-grill),
+  convert to Ralph implementation plan and autonomously execute all tasks until
+  complete. Combines setup-matt-pocock-skills, prd-grill, to-issues, ralph-init,
+  ralph-implement, and tdd. Use when user says PRD is finalized, /prd-build-loop,
+  or wants to implement entire PRD automatically. If PRD missing, point to
+  /prd-author.
 disable-model-invocation: true
 ---
 
@@ -29,7 +30,7 @@ Verify before starting:
 | User confirmed finalized | Ask once if not stated |
 | Git clean or committed | Recommend commit before loop |
 
-If PRD files are missing, **STOP** and tell user to finish PRD first.
+If PRD files are missing, **STOP** and tell user to run **`/prd-author`** first (or finish drafting modular PRD).
 
 ### Phase 0.5 — PRD grill gate
 

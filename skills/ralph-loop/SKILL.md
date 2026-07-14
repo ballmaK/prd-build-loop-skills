@@ -8,7 +8,9 @@ disable-model-invocation: true
 
 ## Cursor mode
 
-If PRD is not grill-approved yet, run **`/prd-grill`** first.
+If modular PRD is missing, run **`/prd-author`** first.
+
+If PRD exists but is not grill-approved yet, run **`/prd-grill`**.
 
 Then invoke **`prd-build-loop`** or **`prd-build-loop continue`** in new Agent sessions.
 

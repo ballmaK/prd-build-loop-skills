@@ -28,7 +28,7 @@ Verify:
 | Module PRDs | `docs/prd/modules/M*.md` |
 | Dev order (if present) | `docs/prd/README.md` |
 
-If missing, **STOP** and tell the user to draft PRD first.
+If missing, **STOP** and tell the user to run **`/prd-author`** first (generate modular PRD from the idea).
 
 Read macro + module list. Skim module acceptance criteria headings. Prefer codebase facts over questions (same rule as `grilling`).
 
