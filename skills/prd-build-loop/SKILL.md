@@ -1,18 +1,18 @@
 ---
 name: prd-build-loop
 description: >-
-  After finalized modular PRD in docs/prd/ (from /prd-author then /prd-grill),
-  convert to Ralph implementation plan and autonomously execute all tasks until
-  complete. Combines setup-matt-pocock-skills, prd-grill, to-issues, ralph-init,
-  ralph-implement, and tdd. Use when user says PRD is finalized, /prd-build-loop,
-  or wants to implement entire PRD automatically. If PRD missing, point to
-  /prd-author.
+  After finalized modular To-Be PRD in docs/prd/ (from /prd-author then /prd-grill,
+  or brownfield To-Be after /prd-reverse), convert to Ralph implementation plan and
+  autonomously execute all tasks until complete. Combines setup-matt-pocock-skills,
+  prd-grill, to-issues, ralph-init, ralph-implement, and tdd. Use when user says PRD
+  is finalized, /prd-build-loop, or wants to implement entire PRD automatically. If
+  PRD missing, point to /prd-author or /prd-reverse. Never treat As-Is alone as backlog.
 disable-model-invocation: true
 ---
 
 # PRD Build Loop
 
-> **Trigger:** User has **finalized** modular PRD under `docs/prd/` (after `/prd-grill`) and wants all tasks implemented autonomously.
+> **Trigger:** User has **finalized** modular To-Be PRD under `docs/prd/` (after `/prd-grill`) and wants all tasks implemented autonomously.
 
 Orchestrates: `prd-grill` (gate) → `setup-matt-pocock-skills` → PRD→Plan → `ralph-implement` × N → done.
 
@@ -24,13 +24,19 @@ Verify before starting:
 
 | Check | Path / Action |
 | ----- | ------------- |
-| Macro PRD exists | `docs/prd/00-macro-shared.md` |
-| Module PRDs exist | `docs/prd/modules/M*.md` |
+| Macro PRD exists | `docs/prd/00-macro-shared.md` **or** agreed To-Be/migrate plan (not As-Is alone) |
+| Module PRDs exist | `docs/prd/modules/M*.md` (or migrate task plan agreed with user) |
 | Grill sign-off approved | `docs/prd/grill-signoff.md` with `status: approved` |
 | User confirmed finalized | Ask once if not stated |
 | Git clean or committed | Recommend commit before loop |
 
-If PRD files are missing, **STOP** and tell user to run **`/prd-author`** first (or finish drafting modular PRD).
+If only `docs/prd/as-is/` exists (reverse output) and there is **no** To-Be / migrate plan:
+
+1. **STOP** — As-Is is fidelity documentation, not an implementation backlog.
+2. Tell the user to finish characterization + To-Be/gap/migrate planning first.
+3. Point to **`/prd-reverse`** if As-Is is missing or unsigned.
+
+If greenfield PRD files are missing entirely, **STOP** and tell user to run **`/prd-author`** first (or finish drafting modular PRD).
 
 ### Phase 0.5 — PRD grill gate
 

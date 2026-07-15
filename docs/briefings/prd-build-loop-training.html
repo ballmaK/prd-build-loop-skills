@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI 提效培训 · Skills 交付流程速成</title>
+  <!--
+    Design Read: internal team training deck for AI productivity colleagues,
+    tool-agnostic (Cursor / OpenCode / others), editorial + hands-on language.
+    Dials: DESIGN_VARIANCE 6 / MOTION_INTENSITY 4 / VISUAL_DENSITY 4
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #171717;
+      --muted: #5a615c;
+      --paper: #f2f0ea;
+      --panel: #fbfaf6;
+      --line: #d5d8d2;
+      --signal: #0f6b5c;
+      --signal-soft: #d7efe8;
+      --warn: #9a4d1c;
+      --warn-soft: #f3e4d8;
+      --shadow: 0 18px 50px rgba(23, 23, 23, 0.08);
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --serif: "Source Serif 4", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --slide-pad: clamp(1.25rem, 3.5vw, 3.5rem);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; height: 100%;
+      background: var(--paper); color: var(--ink);
+      font-family: var(--serif); overflow: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(900px 500px at 8% -10%, rgba(15, 107, 92, 0.12), transparent 55%),
+        radial-gradient(700px 420px at 100% 0%, rgba(154, 77, 28, 0.07), transparent 50%),
+        linear-gradient(180deg, rgba(255,255,255,0.35), transparent 30%);
+    }
+    .deck { position: relative; z-index: 1; height: 100%; width: 100%; }
+    .slide {
+      position: absolute; inset: 0;
+      display: grid; grid-template-rows: auto 1fr auto;
+      padding: var(--slide-pad);
+      padding-bottom: calc(var(--slide-pad) + 3.4rem);
+      opacity: 0; visibility: hidden;
+      transform: translateY(14px) scale(0.988);
+      transition: opacity 380ms ease, transform 480ms cubic-bezier(.2,.8,.2,1), visibility 0s linear 380ms;
+      pointer-events: none; overflow: auto;
+    }
+    .slide.is-active {
+      opacity: 1; visibility: visible; transform: none;
+      transition-delay: 0s; pointer-events: auto;
+    }
+    .eyebrow {
+      font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--signal); margin: 0 0 1rem; font-weight: 500;
+    }
+    h1, h2 {
+      font-family: var(--display); font-weight: 800;
+      letter-spacing: -0.035em; line-height: 1.02; margin: 0;
+    }
+    h1 { font-size: clamp(2.2rem, 5.4vw, 4.4rem); max-width: 16ch; }
+    h2 { font-size: clamp(1.7rem, 3.8vw, 3rem); max-width: 20ch; }
+    .lede {
+      margin: 1.1rem 0 0; max-width: 42rem;
+      font-size: clamp(1rem, 1.4vw, 1.22rem); line-height: 1.55; color: var(--muted);
+    }
+    .rule { width: 4.2rem; height: 4px; background: var(--signal); border: 0; margin: 1.15rem 0 0; }
+    .footer-bar {
+      display: flex; justify-content: space-between; gap: 1rem; align-items: end;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+      letter-spacing: 0.04em; padding-top: 0.85rem; border-top: 1px solid var(--line);
+    }
+    .chrome {
+      position: fixed; z-index: 5; left: 0; right: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.8rem clamp(1rem, 3vw, 2rem);
+      background: color-mix(in srgb, var(--panel) 86%, transparent);
+      border-top: 1px solid var(--line);
+    }
+    .dots { display: flex; gap: 0.42rem; flex-wrap: wrap; justify-content: center; flex: 1; }
+    .dots button {
+      width: 0.5rem; height: 0.5rem; border-radius: 999px; border: 0; padding: 0;
+      background: var(--line); cursor: pointer;
+    }
+    .dots button[aria-current="true"] { background: var(--signal); width: 1.25rem; }
+    .nav-btn {
+      font-family: var(--mono); font-size: 0.74rem; border: 1px solid var(--line);
+      background: var(--panel); color: var(--ink); padding: 0.5rem 0.8rem;
+      cursor: pointer; border-radius: 999px;
+    }
+    .nav-btn:hover { border-color: var(--signal); color: var(--signal); }
+    .hint {
+      position: fixed; top: 0.9rem; right: 1rem; z-index: 6;
+      font-family: var(--mono); font-size: 0.68rem; color: var(--muted);
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      border: 1px solid var(--line); padding: 0.35rem 0.6rem; border-radius: 999px;
+    }
+
+    .split {
+      display: grid; grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(1rem, 2.5vw, 2.5rem); align-items: stretch; min-height: 0;
+    }
+    @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; }
+      h1, h2 { max-width: 100%; }
+      .hint { display: none; }
+    }
+    .panel {
+      background: var(--panel); border: 1px solid var(--line);
+      padding: clamp(1rem, 2vw, 1.4rem); box-shadow: var(--shadow);
+    }
+    .panel.soft {
+      background: linear-gradient(160deg, var(--signal-soft), var(--panel) 55%);
+    }
+    .panel.warn {
+      background: linear-gradient(160deg, var(--warn-soft), var(--panel) 60%);
+    }
+    .k {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--muted); margin: 0 0 0.45rem;
+    }
+    .panel .k.signal { color: var(--signal); }
+    .big {
+      font-family: var(--display); font-size: clamp(2.8rem, 7vw, 4.6rem);
+      font-weight: 800; color: var(--signal); line-height: 0.9; letter-spacing: -0.04em;
+    }
+    .cmd {
+      font-family: var(--mono); font-size: 0.86rem; background: #111;
+      color: #e8f6f1; padding: 0.75rem 0.9rem; border-radius: 0.4rem;
+      line-height: 1.45; overflow-x: auto; white-space: pre-wrap;
+    }
+    .cmd em { color: #8fd6c4; font-style: normal; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 0.75rem; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; margin-top: 0.75rem; }
+    .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.75rem; }
+    @media (max-width: 900px) {
+      .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 701px) and (max-width: 900px) {
+      .grid2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .card {
+      background: var(--panel); border: 1px solid var(--line); padding: 1rem 1.05rem;
+    }
+    .card h3 {
+      font-family: var(--display); font-size: 1.15rem; margin: 0 0 0.4rem; letter-spacing: -0.02em;
+    }
+    .card p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+    .card.accent {
+      background: linear-gradient(180deg, var(--signal-soft), var(--panel));
+      border-color: color-mix(in srgb, var(--signal) 30%, var(--line));
+    }
+
+    .list-rows { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+    .list-rows li {
+      display: grid; grid-template-columns: 3rem 1fr; gap: 0.8rem;
+      padding: 0.85rem 0; border-bottom: 1px solid var(--line); align-items: baseline;
+    }
+    .list-rows .n { font-family: var(--mono); color: var(--signal); }
+    .list-rows strong { font-family: var(--display); font-size: 1.05rem; display: block; margin-bottom: 0.15rem; }
+    .list-rows span { color: var(--muted); font-size: 0.95rem; }
+
+    .flow5 {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.65rem; margin-top: 0.75rem;
+    }
+    @media (max-width: 980px) { .flow5 { grid-template-columns: 1fr 1fr; } }
+    .flow5 article { background: var(--panel); border: 1px solid var(--line); padding: 0.9rem; min-height: 9.5rem; }
+    .flow5 article.accent {
+      background: linear-gradient(180deg, var(--signal-soft), var(--panel));
+    }
+    .flow5 h3 { font-family: var(--display); font-size: 1.2rem; margin: 0.4rem 0 0.35rem; }
+    .flow5 p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.4; }
+
+    .checklist { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.55rem; }
+    .checklist li {
+      padding: 0.7rem 0.85rem 0.7rem 2.2rem; background: var(--panel);
+      border: 1px solid var(--line); position: relative; font-size: 0.98rem; line-height: 1.4;
+    }
+    .checklist li::before {
+      content: "□"; position: absolute; left: 0.75rem; top: 0.7rem;
+      font-family: var(--mono); color: var(--signal);
+    }
+
+    .pitfall {
+      border-left: 3px solid var(--warn); padding: 0.85rem 1rem;
+      background: var(--panel); border-top: 1px solid var(--line);
+      border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .pitfall h3 { font-family: var(--display); font-size: 1.1rem; margin: 0 0 0.35rem; }
+    .pitfall p { margin: 0; color: var(--muted); font-size: 0.94rem; line-height: 1.45; }
+
+    .tool-table {
+      width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.95rem;
+    }
+    .tool-table th, .tool-table td {
+      text-align: left; padding: 0.7rem 0.55rem; border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .tool-table th {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--signal); font-weight: 500;
+    }
+    .tool-table code { font-family: var(--mono); font-size: 0.84rem; }
+
+    .quote {
+      font-family: var(--display); font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+      letter-spacing: -0.02em; line-height: 1.25; max-width: 28ch; margin: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide { transition: none; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hint">← → 翻页 · 空格下一页</div>
+
+  <main class="deck" id="deck" aria-live="polite">
+
+    <!-- 1 COVER -->
+    <section class="slide is-active" aria-label="开场">
+      <p class="eyebrow">AI Productivity Training / Skills Workflow</p>
+      <div class="split">
+        <div>
+          <h1>用 Skills，把 AI 对话变成可重复的交付流程</h1>
+          <hr class="rule" />
+          <p class="lede">给等待提效培训的同事：不管你用 Cursor、OpenCode 还是别的 Agent，目标一样。今天结束后，你能选对入口，并独立跑通一条最短路径。</p>
+        </div>
+        <aside class="panel soft">
+          <p class="k signal">今天你能带走</p>
+          <div class="big" style="font-size:2.6rem;margin:0.4rem 0 1rem;">3</div>
+          <p style="margin:0 0 0.7rem;"><strong style="font-family:var(--display);">一张地图</strong><br /><span style="color:var(--muted);font-size:0.95rem;">生成/逆向 → 挑战 → 实现</span></p>
+          <p style="margin:0 0 0.7rem;border-top:1px solid var(--line);padding-top:0.7rem;"><strong style="font-family:var(--display);">两条入口</strong><br /><span style="color:var(--muted);font-size:0.95rem;">新品绿场，或老项目棕地</span></p>
+          <p style="margin:0;border-top:1px solid var(--line);padding-top:0.7rem;"><strong style="font-family:var(--display);">三个铁律</strong><br /><span style="color:var(--muted);font-size:0.95rem;">一次一问 · 一次一任务 · 不过门不写</span></p>
+        </aside>
+      </div>
+      <div class="footer-bar"><span>Team training deck</span><span></span></div>
+    </section>
+
+    <!-- 2 RESONANCE -->
+    <section class="slide" aria-label="共鸣">
+      <div>
+        <p class="eyebrow">01 / 你可能正在这样用 AI</p>
+        <h2>快是有了，可控还没有</h2>
+        <hr class="rule" />
+        <div class="grid2">
+          <article class="card">
+            <h3>把整页需求一次性丢进去</h3>
+            <p>结果又长又飘，改到后面自己也讲不清改了什么。</p>
+          </article>
+          <article class="card">
+            <h3>一次让 AI 做整条链路</h3>
+            <p>测也绿了，但上线时才发现边界、鉴权、脏数据全漏了。</p>
+          </article>
+          <article class="card">
+            <h3>老项目不敢让 AI 大改</h3>
+            <p>怕破坏现有行为，又找不到从哪里安全下手。</p>
+          </article>
+          <article class="card">
+            <h3>换个工具就要重学一套说法</h3>
+            <p>今天 Cursor，明天 OpenCode，流程却绑死在某一个界面上。</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 3 REDEFINE -->
+    <section class="slide" aria-label="重新定义">
+      <div>
+        <p class="eyebrow">02 / 换个定义</p>
+        <h2>Skills 不是提示词收藏夹，是可搬运的工作流</h2>
+        <hr class="rule" />
+        <div class="split" style="margin-top:1rem;">
+          <div>
+            <p class="lede" style="margin-top:0;">把「怎么提问、做到哪停、产物落哪里」写成技能。换工具只换触发方式，不换做事顺序。</p>
+            <ul class="list-rows">
+              <li><span class="n">01</span><div><strong>看产物，不看哪家 UI</strong><span>成功与否看 docs/prd、签核、active-plan</span></div></li>
+              <li><span class="n">02</span><div><strong>触发可用斜杠或自然语言</strong><span>有的工具是 /技能名，有的是一句话说清</span></div></li>
+              <li><span class="n">03</span><div><strong>人和 Agent 分工固定</strong><span>你做决策，它做探索、综合、小步实现</span></div></li>
+            </ul>
+          </div>
+          <aside class="panel">
+            <p class="k signal">一句话记住</p>
+            <p class="quote">先对齐，再动手。一次只推进一步。</p>
+          </aside>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 4 TOOL AGNOSTIC -->
+    <section class="slide" aria-label="工具无关">
+      <div>
+        <p class="eyebrow">03 / 工具适配</p>
+        <h2>Cursor、OpenCode、其他 Agent，同一条流程</h2>
+        <hr class="rule" />
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>你要做的事</th>
+              <th>统一说法</th>
+              <th>成功信号（跟工具无关）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>安装本套技能</td>
+              <td><code>npx skills add … --agent &lt;你的工具&gt;</code></td>
+              <td>技能列表里出现 prd-author / prd-reverse / prd-grill / prd-build-loop</td>
+            </tr>
+            <tr>
+              <td>触发技能</td>
+              <td><code>/prd-author</code> 或「按 prd-author 帮我…」</td>
+              <td>Agent 进入该技能的阶段规则，而不是自由发挥长文</td>
+            </tr>
+            <tr>
+              <td>判断是否做对了</td>
+              <td>打开产物路径核对</td>
+              <td><code>docs/prd/</code>、<code>*-signoff.md</code>、<code>active-plan.md</code> 出现且内容合理</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="lede">没有 slash 也没关系：用自然语言点名技能。关键是产物路径，不要跟某个 IDE 按钮死磕。</p>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 5 MAP -->
+    <section class="slide" aria-label="地图">
+      <div>
+        <p class="eyebrow">04 / 全景地图</p>
+        <h2>先记住这一条链</h2>
+        <hr class="rule" />
+        <div class="flow5">
+          <article>
+            <p class="k signal">入口</p>
+            <h3>原料</h3>
+            <p>新想法，或老代码库</p>
+          </article>
+          <article class="accent">
+            <p class="k signal">Align</p>
+            <h3>挑战</h3>
+            <p>一次一问，锁定决策</p>
+          </article>
+          <article>
+            <p class="k signal">Spec</p>
+            <h3>PRD</h3>
+            <p>模块化写进 docs/prd</p>
+          </article>
+          <article>
+            <p class="k signal">Build</p>
+            <h3>实现</h3>
+            <p>一次一个竖切任务</p>
+          </article>
+          <article>
+            <p class="k signal">Done</p>
+            <h3>验收</h3>
+            <p>测过、能讲清、可续跑</p>
+          </article>
+        </div>
+        <p class="lede">培训里先求「跑通最短路径」，别一上来追求全自动无人值守。</p>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 6 PICK ENTRY -->
+    <section class="slide" aria-label="选入口">
+      <div>
+        <p class="eyebrow">05 / 30 秒选型</p>
+        <h2>先选你的入口，再动手</h2>
+        <hr class="rule" />
+        <div class="grid2">
+          <article class="card accent">
+            <p class="k signal">绿场</p>
+            <h3>我有一个新想法 / 新功能</h3>
+            <p>走 <code>prd-author</code> → <code>prd-grill</code> → <code>prd-build-loop</code></p>
+          </article>
+          <article class="card accent">
+            <p class="k signal">棕地</p>
+            <h3>我要动现有老项目</h3>
+            <p>走 <code>prd-reverse</code> → 表征基线 → To-Be/迁移 → <code>prd-build-loop</code></p>
+          </article>
+        </div>
+        <div class="panel warn" style="margin-top:1rem;">
+          <p class="k" style="color:var(--warn);">别混</p>
+          <p style="margin:0;color:var(--muted);">As-Is（逆向文档）描述“现在是什么”，不能直接当改造任务列表丢给实现环。</p>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 7 GREENFIELD DRILL -->
+    <section class="slide" aria-label="绿场跟练">
+      <div>
+        <p class="eyebrow">06 / 绿场跟练</p>
+        <h2>新想法：抄这三段触发语</h2>
+        <hr class="rule" />
+        <div class="grid3">
+          <article class="card">
+            <p class="k signal">第 1 步</p>
+            <h3>生成 PRD</h3>
+            <div class="cmd" style="margin-top:0.6rem;">触发：<em>prd-author</em>
+说法：按 prd-author，从我的想法生成模块化 PRD。一次只问一个问题。</div>
+            <p style="margin-top:0.55rem;color:var(--muted);font-size:0.88rem;">产物：docs/prd/00-macro-shared.md + modules/*</p>
+          </article>
+          <article class="card">
+            <p class="k signal">第 2 步</p>
+            <h3>成品挑战</h3>
+            <div class="cmd" style="margin-top:0.6rem;">触发：<em>prd-grill</em>
+说法：按 prd-grill 挑战现有 PRD，通过后写签核。</div>
+            <p style="margin-top:0.55rem;color:var(--muted);font-size:0.88rem;">产物：docs/prd/grill-signoff.md 且 status: approved</p>
+          </article>
+          <article class="card">
+            <p class="k signal">第 3 步</p>
+            <h3>循环实现</h3>
+            <div class="cmd" style="margin-top:0.6rem;">触发：<em>prd-build-loop</em>
+说法：按 prd-build-loop 开始实现；每次只做一个任务。</div>
+            <p style="margin-top:0.55rem;color:var(--muted);font-size:0.88rem;">产物：active-plan 勾选推进 + 小步提交</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 8 BROWNFIELD DRILL -->
+    <section class="slide" aria-label="棕地跟练">
+      <div>
+        <p class="eyebrow">07 / 棕地跟练</p>
+        <h2>老项目：先还原，再谈改造</h2>
+        <hr class="rule" />
+        <div class="grid2">
+          <article class="card">
+            <p class="k signal">第 1 步</p>
+            <h3>逆向 As-Is</h3>
+            <div class="cmd" style="margin-top:0.6rem;">触发：<em>prd-reverse</em>
+说法：按 prd-reverse 从当前代码生成 As-Is PRD。猜的请标 hypothesis。</div>
+            <p style="margin-top:0.55rem;color:var(--muted);font-size:0.9rem;">产物：docs/prd/as-is/ + reverse-signoff</p>
+          </article>
+          <article class="card">
+            <p class="k signal">第 2 步</p>
+            <h3>锁行为再改</h3>
+            <p style="margin-top:0.55rem;">在将要动的边界补表征测试，锁住今天的外部行为。然后再写 To-Be / 迁移计划，最后才进 build-loop。</p>
+            <p style="margin-top:0.7rem;color:var(--muted);font-size:0.9rem;">口诀：先拍照片，再做手术。</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 9 IRON RULES -->
+    <section class="slide" aria-label="三铁律">
+      <div>
+        <p class="eyebrow">08 / 三铁律</p>
+        <h2>培训现场最该记住的三件事</h2>
+        <hr class="rule" />
+        <div class="grid3">
+          <article class="card accent">
+            <p class="k signal">Ask</p>
+            <h3>一次只问一个问题</h3>
+            <p>挑战阶段连发五问，你会答到糊。决策归你，事实归仓库。</p>
+          </article>
+          <article class="card accent">
+            <p class="k signal">Build</p>
+            <h3>一次只做一个任务</h3>
+            <p>一个 checkbox = 一次迭代。想顺便重构半个系统，就会失控。</p>
+          </article>
+          <article class="card accent">
+            <p class="k signal">Gate</p>
+            <h3>不过门不写代码</h3>
+            <p>没有 approved 签核，就不启动实现环。急也要急在对齐上。</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 10 PITFALLS -->
+    <section class="slide" aria-label="翻车点">
+      <div>
+        <p class="eyebrow">09 / 常见翻车</p>
+        <h2>这三坑，同事们最容易踩</h2>
+        <hr class="rule" />
+        <div class="grid3" style="margin-top:0.9rem;">
+          <div class="pitfall">
+            <h3>忘了签核就实现</h3>
+            <p>现象：直接 build-loop。修法：先看 grill/reverse signoff 是否 approved。</p>
+          </div>
+          <div class="pitfall">
+            <h3>把 As-Is 当 backlog</h3>
+            <p>现象：逆向文档丢给实现。修法：As-Is 只证明现状，改造要有 To-Be/迁移任务。</p>
+          </div>
+          <div class="pitfall">
+            <h3>一会话塞太多任务</h3>
+            <p>现象：上下文爆炸、越改越飘。修法：满 3–5 个任务就 handoff，新开会话续跑。</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 11 HOMEWORK -->
+    <section class="slide" aria-label="回家作业">
+      <div>
+        <p class="eyebrow">10 / 回去怎么练</p>
+        <h2>今晚只用真实需求跑一段</h2>
+        <hr class="rule" />
+        <div class="split">
+          <div>
+            <ul class="checklist">
+              <li>选一个真实、小的需求（别选“重构整个系统”）</li>
+              <li>先判定绿场还是棕地</li>
+              <li>装好技能后，只跑到「签核通过」也算完成</li>
+              <li>若进入实现：最多完成 1 个竖切任务就停下复盘</li>
+              <li>记下：卡在哪、产物有没有、哪句触发语最有效</li>
+            </ul>
+          </div>
+          <aside class="panel soft">
+            <p class="k signal">自检三问</p>
+            <p style="margin:0 0 0.7rem;line-height:1.45;">1. 我能否向同事讲清这次改动的目标与非目标？</p>
+            <p style="margin:0 0 0.7rem;line-height:1.45;">2. 仓库里能否指出对应产物文件？</p>
+            <p style="margin:0;line-height:1.45;">3. 若换一个 AI 工具，我是否仍知道下一步触发哪项技能？</p>
+          </aside>
+        </div>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 12 CHEAT SHEET -->
+    <section class="slide" aria-label="速查">
+      <div>
+        <p class="eyebrow">11 / 速查卡</p>
+        <h2>一页带走</h2>
+        <hr class="rule" />
+        <table class="tool-table">
+          <thead>
+            <tr><th>场景</th><th>触发</th><th>关键产物</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>新想法写 PRD</td><td><code>prd-author</code></td><td><code>docs/prd/00-macro-shared.md</code> + modules</td></tr>
+            <tr><td>老项目还原</td><td><code>prd-reverse</code></td><td><code>docs/prd/as-is/</code> + reverse-signoff</td></tr>
+            <tr><td>成品挑战</td><td><code>prd-grill</code></td><td><code>grill-signoff.md</code> approved</td></tr>
+            <tr><td>循环实现</td><td><code>prd-build-loop</code> / continue</td><td><code>active-plan.md</code> 推进</td></tr>
+            <tr><td>会话太长</td><td><code>handoff</code></td><td>handoff 文档，换会话续跑</td></tr>
+          </tbody>
+        </table>
+        <p class="lede">安装时把 <code>--agent</code> 换成你的工具（cursor / opencode / 其他）。流程不变，入口可变。</p>
+      </div>
+      <div class="footer-bar"><span>Training · Skills Workflow</span><span></span></div>
+    </section>
+
+    <!-- 13 CLOSE -->
+    <section class="slide" aria-label="结束">
+      <div style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:40rem;">
+        <p class="eyebrow">Close</p>
+        <h2>先把流程跑通，再追求更快。</h2>
+        <hr class="rule" />
+        <p class="lede">换工具可以，换纪律不行。对齐 → 过门 → 小步实现。有问题直接丢到培训群，带上产物路径会更快被帮到。</p>
+      </div>
+      <div class="footer-bar"><span>Q&A welcome</span><span></span></div>
+    </section>
+  </main>
+
+  <div class="chrome" role="navigation" aria-label="翻页">
+    <button class="nav-btn" id="prev" type="button">上一页</button>
+    <div class="dots" id="dots"></div>
+    <button class="nav-btn" id="next" type="button">下一页</button>
+  </div>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const dots = document.getElementById("dots");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      let index = 0;
+      const total = slides.length;
+
+      slides.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "第 " + (i + 1) + " 页");
+        b.addEventListener("click", () => go(i));
+        dots.appendChild(b);
+      });
+
+      function paintFooter() {
+        slides.forEach((s, i) => {
+          const el = s.querySelector(".footer-bar span:last-child");
+          if (el) el.textContent = String(i + 1).padStart(2, "0") + "/" + String(total).padStart(2, "0");
+        });
+      }
+
+      function go(i) {
+        index = (i + total) % total;
+        slides.forEach((s, n) => s.classList.toggle("is-active", n === index));
+        Array.from(dots.children).forEach((d, n) => {
+          if (n === index) d.setAttribute("aria-current", "true");
+          else d.removeAttribute("aria-current");
+        });
+        history.replaceState(null, "", "#" + (index + 1));
+      }
+
+      prev.addEventListener("click", () => go(index - 1));
+      next.addEventListener("click", () => go(index + 1));
+      window.addEventListener("keydown", (e) => {
+        if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); go(index + 1); }
+        else if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); go(index - 1); }
+        else if (e.key === "Home") go(0);
+        else if (e.key === "End") go(total - 1);
+      });
+
+      let touchX = null;
+      window.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].screenX; }, { passive: true });
+      window.addEventListener("touchend", (e) => {
+        if (touchX == null) return;
+        const dx = e.changedTouches[0].screenX - touchX;
+        if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+        touchX = null;
+      }, { passive: true });
+
+      paintFooter();
+      const fromHash = parseInt((location.hash || "").replace("#", ""), 10);
+      go(Number.isFinite(fromHash) && fromHash >= 1 ? fromHash - 1 : 0);
+    })();
+  </script>
+</body>
+</html>

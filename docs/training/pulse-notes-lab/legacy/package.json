@@ -1,0 +1,6 @@
+{
+  "name": "pulse-notes-legacy",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test" }
+}

@@ -8,9 +8,14 @@ disable-model-invocation: true
 
 ## Cursor mode
 
-If modular PRD is missing, run **`/prd-author`** first.
+If modular To-Be PRD is missing:
 
-If PRD exists but is not grill-approved yet, run **`/prd-grill`**.
+- Greenfield idea → run **`/prd-author`** first
+- Brownfield codebase → run **`/prd-reverse`** first（As-Is only 还不能进 build）
+
+If To-Be PRD exists but is not grill-approved yet, run **`/prd-grill`**.
+
+As-Is only (no To-Be/migrate plan) → do **not** start build-loop yet.
 
 Then invoke **`prd-build-loop`** or **`prd-build-loop continue`** in new Agent sessions.
 

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>把 AI 编码变成可管控的交付系统 · Exec Briefing</title>
+  <!--
+    Design Read: B2B internal exec briefing web-deck for engineering leaders,
+    editorial/technical language, asymmetric slides + keyboard navigation.
+    Dials: DESIGN_VARIANCE 7 / MOTION_INTENSITY 5 / VISUAL_DENSITY 3
+    Anti-slop: no purple mesh, no Inter, no equal card grids, no glassmorphism spam.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #171717;
+      --muted: #5a615c;
+      --paper: #f2f0ea;
+      --paper-2: #e7ebe6;
+      --panel: #fbfaf6;
+      --line: #d5d8d2;
+      --signal: #0f6b5c;
+      --signal-soft: #d7efe8;
+      --warn: #9a4d1c;
+      --shadow: 0 18px 50px rgba(23, 23, 23, 0.08);
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --serif: "Source Serif 4", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --slide-pad: clamp(1.5rem, 4vw, 4rem);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(900px 500px at 8% -10%, rgba(15, 107, 92, 0.12), transparent 55%),
+        radial-gradient(700px 420px at 100% 0%, rgba(154, 77, 28, 0.08), transparent 50%),
+        linear-gradient(180deg, rgba(255,255,255,0.35), transparent 30%);
+      z-index: 0;
+    }
+
+    .deck {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: var(--slide-pad);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(18px) scale(0.985);
+      transition: opacity 420ms ease, transform 520ms cubic-bezier(.2,.8,.2,1), visibility 0s linear 420ms;
+      pointer-events: none;
+    }
+    .slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+      pointer-events: auto;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin: 0 0 1.25rem;
+      font-weight: 500;
+    }
+
+    h1, h2 {
+      font-family: var(--display);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 0.98;
+      margin: 0;
+    }
+    h1 { font-size: clamp(2.6rem, 6.2vw, 5.4rem); max-width: 14ch; }
+    h2 { font-size: clamp(2rem, 4.4vw, 3.6rem); max-width: 18ch; }
+
+    .lede {
+      margin: 1.35rem 0 0;
+      max-width: 42rem;
+      font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .rule {
+      width: 4.5rem;
+      height: 4px;
+      background: var(--signal);
+      border: 0;
+      margin: 1.4rem 0 0;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .chrome {
+      position: fixed;
+      z-index: 5;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem clamp(1rem, 3vw, 2rem);
+      background: color-mix(in srgb, var(--panel) 82%, transparent);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--line);
+    }
+
+    .dots {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex: 1;
+    }
+    .dots button {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      border: 0;
+      padding: 0;
+      background: var(--line);
+      cursor: pointer;
+    }
+    .dots button[aria-current="true"] {
+      background: var(--signal);
+      width: 1.35rem;
+    }
+
+    .nav-btn {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 0.55rem 0.85rem;
+      cursor: pointer;
+      border-radius: 999px;
+    }
+    .nav-btn:hover { border-color: var(--signal); color: var(--signal); }
+
+    .hint {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 6;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      background: color-mix(in srgb, var(--panel) 90%, transparent);
+      border: 1px solid var(--line);
+      padding: 0.4rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    /* layouts */
+    .split {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(1.25rem, 3vw, 3rem);
+      align-items: stretch;
+      min-height: 0;
+    }
+    @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; }
+      h1 { max-width: 100%; }
+      .hint { display: none; }
+    }
+
+    .signal-panel {
+      background:
+        linear-gradient(160deg, var(--signal-soft), transparent 45%),
+        var(--panel);
+      border: 1px solid var(--line);
+      padding: clamp(1.1rem, 2vw, 1.75rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: var(--shadow);
+      align-self: center;
+    }
+    .signal-panel .k {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .signal-panel .big {
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      font-weight: 800;
+      color: var(--signal);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+    .signal-panel .row {
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line);
+    }
+    .signal-panel .row strong {
+      display: block;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      margin-bottom: 0.2rem;
+    }
+    .signal-panel .row span { color: var(--muted); font-size: 0.95rem; }
+
+    .agenda {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+    .agenda li {
+      display: grid;
+      grid-template-columns: 3.2rem 8rem 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    @media (max-width: 700px) {
+      .agenda li { grid-template-columns: 2.5rem 1fr; }
+      .agenda .desc { grid-column: 2; }
+    }
+    .agenda .num {
+      font-family: var(--mono);
+      color: var(--signal);
+      font-weight: 500;
+    }
+    .agenda .title {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .agenda .desc { color: var(--muted); }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 700px) { .problem-grid { grid-template-columns: 1fr; } }
+    .problem-grid article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 1.15rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-grid article::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--warn);
+    }
+    .problem-grid h3 {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      margin: 0 0 0.45rem;
+    }
+    .problem-grid p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.45;
+    }
+
+    .thesis-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 52rem;
+    }
+    .thesis-body .note {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 900px) { .flow { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .flow { grid-template-columns: 1fr; } }
+    .flow article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 1rem;
+      min-height: 11rem;
+      position: relative;
+    }
+    .flow article.accent {
+      background: linear-gradient(180deg, var(--signal-soft), var(--panel));
+      border-color: color-mix(in srgb, var(--signal) 35%, var(--line));
+    }
+    .flow .k {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--signal);
+      letter-spacing: 0.06em;
+    }
+    .flow h3 {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      margin: 0.55rem 0 0.5rem;
+    }
+    .flow p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 0;
+      margin-top: 0.25rem;
+    }
+    .skill-list li {
+      list-style: none;
+      display: grid;
+      grid-template-columns: minmax(9rem, 12rem) 6.5rem 1fr;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+    @media (max-width: 800px) {
+      .skill-list li { grid-template-columns: 1fr; gap: 0.2rem; }
+    }
+    .skill-list code {
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      color: var(--signal);
+    }
+    .skill-list .role {
+      font-family: var(--display);
+      font-weight: 700;
+    }
+    .skill-list .blurb { color: var(--muted); }
+
+    .gov {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 900px) { .gov { grid-template-columns: 1fr; } }
+    .gov article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 1.25rem;
+      min-height: 14rem;
+    }
+    .gov .k {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--signal);
+    }
+    .gov h3 {
+      font-family: var(--display);
+      font-size: 1.55rem;
+      margin: 0.7rem 0 0.8rem;
+      letter-spacing: -0.02em;
+    }
+    .gov p { margin: 0; color: var(--muted); line-height: 1.45; }
+
+    .play {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 900px) { .play { grid-template-columns: 1fr 1fr; } }
+    .play article {
+      border-top: 3px solid var(--signal);
+      padding-top: 0.85rem;
+    }
+    .play .k {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--signal);
+    }
+    .play h3 {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      margin: 0.45rem 0 0.5rem;
+    }
+    .play p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.4; }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 800px) { .compare { grid-template-columns: 1fr; } }
+    .compare article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 1.25rem 1.35rem;
+    }
+    .compare .k {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .compare.future .k, .compare article.future .k { color: var(--signal); }
+    .compare h3 {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      margin: 0.55rem 0 0.9rem;
+    }
+    .compare ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .compare li {
+      color: var(--muted);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .compare li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      background: var(--line);
+    }
+    .compare article.future li::before { background: var(--signal); }
+    .compare article.future {
+      background: linear-gradient(165deg, var(--signal-soft), var(--panel) 55%);
+      border-color: color-mix(in srgb, var(--signal) 30%, var(--line));
+    }
+
+    .tracks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 800px) { .tracks { grid-template-columns: 1fr; } }
+    .tracks article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 1.25rem;
+    }
+    .tracks .k {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--signal);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .tracks h3 {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      margin: 0.5rem 0 0.75rem;
+    }
+    .tracks p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-family: var(--mono);
+      font-size: 0.86rem;
+    }
+
+    .ask-list {
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+    }
+    .ask-list li {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      line-height: 1.4;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .ask-list li::before {
+      content: attr(data-n);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--signal);
+    }
+    .closing-note {
+      margin-top: 1.75rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .close-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      max-width: 40rem;
+    }
+
+    .bracket {
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      border: 2px solid var(--signal);
+      opacity: 0.7;
+    }
+    .bracket.tl { top: var(--slide-pad); left: var(--slide-pad); border-right: 0; border-bottom: 0; }
+    .bracket.br { bottom: calc(var(--slide-pad) + 3.2rem); right: var(--slide-pad); border-left: 0; border-top: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide { transition: none; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hint">← → 翻页 · 空格下一页</div>
+
+  <main class="deck" id="deck" aria-live="polite">
+    <!-- 01 COVER -->
+    <section class="slide is-active" data-title="封面" aria-label="封面">
+      <p class="eyebrow">Cursor Agent Skills / Software Delivery</p>
+      <div class="split">
+        <div>
+          <h1>把 AI 编码变成可管控的交付系统</h1>
+          <hr class="rule" />
+          <p class="lede">prd-build-loop-skills 实战思路汇报。从想法或老代码出发，经挑战、计划、循环实现，形成可续跑、可追责的交付编排。</p>
+        </div>
+        <aside class="signal-panel" aria-label="关键信号">
+          <div class="k">Signal module</div>
+          <div class="big">2</div>
+          <div class="row">
+            <strong>两条主路径</strong>
+            <span>绿场新品与棕地逆向</span>
+          </div>
+          <div class="row">
+            <strong>一条主流程</strong>
+            <span>挑战 → 计划 → 实现 → 验收</span>
+          </div>
+          <div class="row">
+            <strong>面向领导的价值</strong>
+            <span>可控、可续跑、可追责</span>
+          </div>
+        </aside>
+      </div>
+      <div class="footer-bar"><span>Internal briefing</span><span>Taste-design HTML deck</span></div>
+    </section>
+
+    <!-- 02 AGENDA -->
+    <section class="slide" data-title="提纲" aria-label="提纲">
+      <div>
+        <p class="eyebrow">01 / Agenda</p>
+        <h2>今天汇报什么</h2>
+        <hr class="rule" />
+        <ol class="agenda">
+          <li><span class="num">01</span><span class="title">为什么做</span><span class="desc">AI 写代码容易快，但交付不可控</span></li>
+          <li><span class="num">02</span><span class="title">总思路</span><span class="desc">先对齐与挑战，再自动化实现</span></li>
+          <li><span class="num">03</span><span class="title">双路径</span><span class="desc">绿场生成 PRD，棕地逆向 As-Is</span></li>
+          <li><span class="num">04</span><span class="title">管控点</span><span class="desc">过门、单任务、会话预算</span></li>
+          <li><span class="num">05</span><span class="title">请拍板</span><span class="desc">标准操作路径与下一阶段投入</span></li>
+        </ol>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 03 PROBLEM -->
+    <section class="slide" data-title="问题" aria-label="问题">
+      <div>
+        <p class="eyebrow">02 / The problem</p>
+        <h2>AI 能写，不等于项目能交</h2>
+        <hr class="rule" />
+        <div class="problem-grid">
+          <article>
+            <h3>需求未推敲就开写</h3>
+            <p>PRD 有洞时，Agent 仍会自信交付错误功能。</p>
+          </article>
+          <article>
+            <h3>上下文越写越脏</h3>
+            <p>一次做太多任务，质量与可追溯性迅速下降。</p>
+          </article>
+          <article>
+            <h3>完成定义薄弱</h3>
+            <p>勾完任务不等于可上线，缺模块验收与回归门。</p>
+          </article>
+          <article>
+            <h3>人被困在循环里</h3>
+            <p>要么全程盯盘，要么完全失控，缺少环上管控。</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 04 THESIS -->
+    <section class="slide" data-title="主张" aria-label="主张">
+      <div class="bracket tl" aria-hidden="true"></div>
+      <div class="bracket br" aria-hidden="true"></div>
+      <div class="thesis-body">
+        <p class="eyebrow">03 / Core thesis</p>
+        <h2>不是让 AI 更快写代码，而是用 Skills 把交付做成可编排系统。</h2>
+        <hr class="rule" />
+        <p class="note">领导关心的三件事：方向对不对，进度可控否，出问题能不能及时停下并复盘。</p>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 05 FLOW -->
+    <section class="slide" data-title="主流程" aria-label="主流程">
+      <div>
+        <p class="eyebrow">04 / Operating system</p>
+        <h2>主流程：挑战 → 计划 → 循环实现</h2>
+        <hr class="rule" />
+        <div class="flow">
+          <article>
+            <div class="k">Discover</div>
+            <h3>原料</h3>
+            <p>绿场想法，或棕地代码真相</p>
+          </article>
+          <article class="accent">
+            <div class="k">Align</div>
+            <h3>挑战</h3>
+            <p>逐问压测决策树，签核过门</p>
+          </article>
+          <article>
+            <div class="k">Plan</div>
+            <h3>计划</h3>
+            <p>竖切任务写入 active-plan</p>
+          </article>
+          <article>
+            <div class="k">Build</div>
+            <h3>实现</h3>
+            <p>单任务 TDD，可续跑循环</p>
+          </article>
+          <article>
+            <div class="k">Done</div>
+            <h3>验收</h3>
+            <p>任务 / 模块 / 发布分层完成</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 06 TWO TRACKS -->
+    <section class="slide" data-title="双路径" aria-label="双路径">
+      <div>
+        <p class="eyebrow">05 / Two tracks</p>
+        <h2>绿场新品与棕地逆向，同一套交付操作系统</h2>
+        <hr class="rule" />
+        <div class="tracks">
+          <article>
+            <div class="k">Greenfield</div>
+            <h3>新想法 → PRD → 实现</h3>
+            <p>/prd-author → /prd-grill → /prd-build-loop</p>
+          </article>
+          <article>
+            <div class="k">Brownfield</div>
+            <h3>老代码 → As-Is → 改造</h3>
+            <p>/prd-reverse → 表征基线 → To-Be / 迁移 → /prd-build-loop</p>
+          </article>
+        </div>
+        <p class="lede" style="margin-top:1.5rem">As-Is 只证明“现在是什么”，不能直接当作改造 backlog。</p>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 07 SKILLS -->
+    <section class="slide" data-title="Skills" aria-label="Skills 地图">
+      <div>
+        <p class="eyebrow">06 / Capability map</p>
+        <h2>谁负责想清楚，谁负责做出来</h2>
+        <hr class="rule" />
+        <ul class="skill-list">
+          <li><code>prd-author</code><span class="role">生成</span><span class="blurb">想法拷问后合成模块化 docs/prd</span></li>
+          <li><code>prd-reverse</code><span class="role">逆向</span><span class="blurb">老代码还原 As-Is PRD 与忠实度签核</span></li>
+          <li><code>prd-grill</code><span class="role">挑战门</span><span class="blurb">成品 PRD 再压测，未过门不准写</span></li>
+          <li><code>prd-build-loop</code><span class="role">主编排</span><span class="blurb">拆计划并驱动循环实现</span></li>
+          <li><code>ralph-*</code><span class="role">执行器</span><span class="blurb">脚手架、单任务、外层续跑</span></li>
+        </ul>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 08 GOVERNANCE -->
+    <section class="slide" data-title="管控" aria-label="管控点">
+      <div>
+        <p class="eyebrow">07 / Governance</p>
+        <h2>三个让领导放心的管控点</h2>
+        <hr class="rule" />
+        <div class="gov">
+          <article>
+            <div class="k">Gate</div>
+            <h3>没过挑战不让写</h3>
+            <p>绿场要 grill-signoff approved；棕地先 reverse-signoff，再谈 To-Be 与改造。</p>
+          </article>
+          <article>
+            <div class="k">Atomic</div>
+            <h3>一次只做一个任务</h3>
+            <p>单任务 + TDD。失败三次停下留痕，拒绝上下文膨胀。</p>
+          </article>
+          <article>
+            <div class="k">Budget</div>
+            <h3>人在环上，不在环里</h3>
+            <p>每会话最多五个任务。handoff 续跑，或 touch .ralph-stop 急停。</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 09 PLAYBOOK -->
+    <section class="slide" data-title="落地" aria-label="落地步骤">
+      <div>
+        <p class="eyebrow">08 / Field playbook</p>
+        <h2>项目里怎么开跑</h2>
+        <hr class="rule" />
+        <div class="play">
+          <article>
+            <div class="k">Prepare</div>
+            <h3>选路径</h3>
+            <p>新品用 author；老项目用 reverse</p>
+          </article>
+          <article>
+            <div class="k">Challenge</div>
+            <h3>过门</h3>
+            <p>grill / reverse sign-off 到位</p>
+          </article>
+          <article>
+            <div class="k">Orchestrate</div>
+            <h3>启动编排</h3>
+            <p>/prd-build-loop 拆竖切任务</p>
+          </article>
+          <article>
+            <div class="k">Continue</div>
+            <h3>续跑交付</h3>
+            <p>continue 直到计划清零</p>
+          </article>
+        </div>
+        <p class="lede">依赖 Matt 的 grilling / domain-modeling / tdd / handoff；本仓库负责业务交付编排。</p>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 10 COMPARE -->
+    <section class="slide" data-title="对比" aria-label="前后对比">
+      <div>
+        <p class="eyebrow">09 / Before to after</p>
+        <h2>从聊天写代码，到系统化交付</h2>
+        <hr class="rule" />
+        <div class="compare">
+          <article>
+            <div class="k">Baseline</div>
+            <h3>传统 Agent 用法</h3>
+            <ul>
+              <li>想到哪写到哪</li>
+              <li>需求缺口靠临场发挥</li>
+              <li>任务边界模糊</li>
+              <li>进度靠聊天记录回忆</li>
+            </ul>
+          </article>
+          <article class="future">
+            <div class="k">Future state</div>
+            <h3>Skills 编排交付</h3>
+            <ul>
+              <li>PRD 先生成或逆向，再过挑战门</li>
+              <li>竖切任务可追踪</li>
+              <li>单任务 TDD 可回滚</li>
+              <li>会话预算与停止开关</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 11 ASK -->
+    <section class="slide" data-title="决策" aria-label="请领导确认">
+      <div class="bracket tl" aria-hidden="true"></div>
+      <div class="bracket br" aria-hidden="true"></div>
+      <div>
+        <p class="eyebrow">10 / Decision ask</p>
+        <h2>请领导确认三件事</h2>
+        <hr class="rule" />
+        <ol class="ask-list">
+          <li data-n="1">以本 Skills 体系作为 AI 辅助研发的标准交付操作系统</li>
+          <li data-n="2">新项目强制模块化 PRD 并过挑战门；老项目先 As-Is 忠实度签核再改造</li>
+          <li data-n="3">批准下一阶段：Review 闸、表征测试基线、绞杀式 migrate 编排</li>
+        </ol>
+        <p class="closing-note">目标不是替代工程判断，而是让判断发生在正确的关卡。</p>
+      </div>
+      <div class="footer-bar"><span>PRD Build Loop · Exec Briefing</span><span></span></div>
+    </section>
+
+    <!-- 12 CLOSE -->
+    <section class="slide" data-title="结束" aria-label="结束">
+      <div class="bracket tl" aria-hidden="true"></div>
+      <div class="bracket br" aria-hidden="true"></div>
+      <div class="close-wrap">
+        <p class="eyebrow">Close</p>
+        <h2>把 AI 关进流程里，而不是把流程交给运气。</h2>
+        <hr class="rule" />
+        <p class="lede">prd-build-loop-skills · Cursor Agent · Taste-design HTML</p>
+      </div>
+      <div class="footer-bar"><span>Ready for questions</span><span></span></div>
+    </section>
+  </main>
+
+  <div class="chrome" role="navigation" aria-label="幻灯片控制">
+    <button class="nav-btn" id="prev" type="button">上一页</button>
+    <div class="dots" id="dots"></div>
+    <button class="nav-btn" id="next" type="button">下一页</button>
+  </div>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const dots = document.getElementById("dots");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      let index = 0;
+      const total = slides.length;
+
+      slides.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "第 " + (i + 1) + " 页");
+        b.addEventListener("click", () => go(i));
+        dots.appendChild(b);
+      });
+
+      function paintFooter() {
+        slides.forEach((s, i) => {
+          const feet = s.querySelectorAll(".footer-bar span:last-child");
+          feet.forEach((el) => {
+            if (!el.textContent || /^\d{2}\/\d{2}$/.test(el.textContent) || el.textContent === "") {
+              el.textContent = String(i + 1).padStart(2, "0") + "/" + String(total).padStart(2, "0");
+            }
+          });
+        });
+      }
+
+      function go(i) {
+        index = (i + total) % total;
+        slides.forEach((s, n) => s.classList.toggle("is-active", n === index));
+        Array.from(dots.children).forEach((d, n) => {
+          if (n === index) d.setAttribute("aria-current", "true");
+          else d.removeAttribute("aria-current");
+        });
+        history.replaceState(null, "", "#" + (index + 1));
+      }
+
+      prev.addEventListener("click", () => go(index - 1));
+      next.addEventListener("click", () => go(index + 1));
+
+      window.addEventListener("keydown", (e) => {
+        if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) {
+          e.preventDefault();
+          go(index + 1);
+        } else if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) {
+          e.preventDefault();
+          go(index - 1);
+        } else if (e.key === "Home") {
+          go(0);
+        } else if (e.key === "End") {
+          go(total - 1);
+        }
+      });
+
+      let touchX = null;
+      window.addEventListener("touchstart", (e) => {
+        touchX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      window.addEventListener("touchend", (e) => {
+        if (touchX == null) return;
+        const dx = e.changedTouches[0].screenX - touchX;
+        if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+        touchX = null;
+      }, { passive: true });
+
+      paintFooter();
+      const fromHash = parseInt((location.hash || "").replace("#", ""), 10);
+      go(Number.isFinite(fromHash) && fromHash >= 1 ? fromHash - 1 : 0);
+    })();
+  </script>
+</body>
+</html>
