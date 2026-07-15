@@ -39,10 +39,10 @@
     <p class="kicker">agenda.toml</p>
     <h2 class="h2 anim-fade-up" data-anim="fade-up">今天的路线图</h2>
     <div class="stack mt-l anim-stagger-list" data-anim-target>
-      <div class="agenda-row"><span class="num">01</span><span class="t">共鸣：你现在怎么用 AI</span><span class="d">~4min</span></div>
-      <div class="agenda-row"><span class="num">02</span><span class="t">地图：Skills 交付链</span><span class="d">~5min</span></div>
-      <div class="agenda-row"><span class="num">03</span><span class="t">选型：绿场还是棕地</span><span class="d">~3min</span></div>
-      <div class="agenda-row"><span class="num">04</span><span class="t">跟练：触发语 + 产物</span><span class="d">~15min</span></div>
+      <div class="agenda-row"><span class="num">01</span><span class="t">共鸣：你现在怎么用 AI</span><span class="d">~3min</span></div>
+      <div class="agenda-row"><span class="num">02</span><span class="t">地基：Matt Pocock Skills 简介</span><span class="d">~6min</span></div>
+      <div class="agenda-row"><span class="num">03</span><span class="t">地图：我们的交付编排怎么接上</span><span class="d">~5min</span></div>
+      <div class="agenda-row"><span class="num">04</span><span class="t">选型 + 跟练（绿场 / 棕地）</span><span class="d">~15min</span></div>
       <div class="agenda-row"><span class="num">05</span><span class="t">铁律、翻车点、回家作业</span><span class="d">~8min</span></div>
     </div>
     <div class="deck-footer"><span class="mono">training agenda</span><span class="slide-number"></span></div>
@@ -74,10 +74,87 @@
     </div>
     <p class="lede mt-l">一句话：<b style="color:#fff">先对齐，再动手。一次只推进一步。</b></p>
     <div class="deck-footer"><span class="mono">portable workflow</span><span class="slide-number"></span></div>
-    <div class="notes">这里把“工具无关”钉死。后面每页都用产物路径说话。</div>
+    <div class="notes">这里把“工具无关”钉死。后面每页都用产物路径说话。下一页引入 Matt 那套作为工程地基。</div>
   </section>
 
-  <!-- 5 Tool agnostic -->
+  <!-- 5 Matt overview: why -->
+  <section class="slide" data-title="Matt地基">
+    <p class="kicker">mattpocock/skills · why</p>
+    <h2 class="h2">先认识地基：Matt Pocock Skills</h2>
+    <p class="lede">一套给真人工程师用的可组合小技能，不是接管一切的“超级框架”。解决 Agent 四类常见翻车。</p>
+    <div class="grid g2 mt-l anim-stagger-list" data-anim-target>
+      <div class="card card-accent"><h4>01 做的不是我想要的</h4><p class="dim">错位最致命。</p><span class="tag mt-s">grill-me / grill-with-docs</span></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>02 说话又长又飘</h4><p class="dim">缺少共享领域语言。</p><span class="tag mt-s">domain-modeling · CONTEXT.md</span></div>
+      <div class="card card-accent"><h4>03 代码根本跑不通</h4><p class="dim">反馈环太弱。</p><span class="tag mt-s">tdd · diagnosing-bugs</span></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-3)"><h4>04 系统糊成泥球</h4><p class="dim">熵加速，模块变浅。</p><span class="tag mt-s">to-spec · improve-architecture</span></div>
+    </div>
+    <div class="deck-footer"><span class="mono">skills for real engineers</span><span class="slide-number"></span></div>
+    <div class="notes">用四个痛点带出 Matt 套件价值。强调：小而可组合，不抢控制权。点名 github.com/mattpocock/skills。</div>
+  </section>
+
+  <!-- 6 Matt map -->
+  <section class="slide" data-title="Matt地图">
+    <p class="kicker">mattpocock/skills · map</p>
+    <h2 class="h2">Matt 套件里，我们最常用这些</h2>
+    <div class="grid g2 mt-l" style="align-items:start">
+      <div>
+        <p class="kicker" style="margin-bottom:8px">你主动触发</p>
+        <div class="stack">
+          <div class="agenda-row"><span class="num">grill*</span><span class="t">拷问对齐</span><span class="d">决策树</span></div>
+          <div class="agenda-row"><span class="num">to-spec</span><span class="t">对话合成规格</span><span class="d">不再面试</span></div>
+          <div class="agenda-row"><span class="num">to-tickets</span><span class="t">拆可领取工单</span><span class="d">竖切</span></div>
+          <div class="agenda-row"><span class="num">handoff</span><span class="t">会话移交续跑</span><span class="d">上下文</span></div>
+          <div class="agenda-row"><span class="num">setup-*</span><span class="t">仓库一次配置</span><span class="d">tracker</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom:8px">可被自动调用</p>
+        <div class="stack">
+          <div class="agenda-row"><span class="num">grilling</span><span class="t">拷问原语</span><span class="d">一次一问</span></div>
+          <div class="agenda-row"><span class="num">tdd</span><span class="t">红绿重构</span><span class="d">竖切反馈</span></div>
+          <div class="agenda-row"><span class="num">domain-*</span><span class="t">术语 / ADR</span><span class="d">CONTEXT</span></div>
+          <div class="agenda-row"><span class="num">research</span><span class="t">高可信源调研</span><span class="d">考古</span></div>
+          <div class="agenda-row"><span class="num">code-review</span><span class="t">标准 × 规格双轴</span><span class="d">验收</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="lede mt-m">推荐链路：<span class="mono">grill-with-docs → to-spec → to-tickets → tdd</span></p>
+    <div class="deck-footer"><span class="mono">composable primitives</span><span class="slide-number"></span></div>
+    <div class="notes">别背全表。强调 user-invoked vs model-invoked。我们仓库是在这些原语上做交付编排。</div>
+  </section>
+
+  <!-- 7 How we compose -->
+  <section class="slide" data-title="怎么组合">
+    <p class="kicker">compose</p>
+    <h2 class="h2">我们这套 = Matt 原语 + 交付编排</h2>
+    <div class="grid g2 mt-l">
+      <div class="card card-accent">
+        <h4>Matt 负责“工程基本功”</h4>
+        <p class="dim mt-s">对齐、领域语言、TDD、调研、评审。小技能，可单用，也可被编排调用。</p>
+        <div class="mt-m"><span class="pill">grilling</span><span class="pill">tdd</span><span class="pill">domain</span><span class="pill">handoff</span></div>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)">
+        <h4>本仓库负责“业务交付链”</h4>
+        <p class="dim mt-s">模块化 PRD 生成/逆向、成品签核门、竖切计划与循环实现，直到可续跑交付。</p>
+        <div class="mt-m"><span class="pill pill-accent">prd-author</span><span class="pill pill-accent">prd-reverse</span><span class="pill pill-accent">prd-grill</span><span class="pill pill-accent">build-loop</span></div>
+      </div>
+    </div>
+    <div class="terminal mt-l">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>mental-model.txt</span></div>
+<pre><span class="cmt"># 绿场心智模型</span>
+grill-with-docs / grilling  →  to-spec 纪律
+        ↓
+   <span class="fn">prd-author</span> 写出 docs/prd
+        ↓
+   <span class="fn">prd-grill</span> 签核过门
+        ↓
+   <span class="fn">prd-build-loop</span> 驱动 <span class="fn">tdd</span> 小步实现</pre>
+    </div>
+    <div class="deck-footer"><span class="mono">primitives + orchestration</span><span class="slide-number"></span></div>
+    <div class="notes">用这张图回答“为什么还要装 Matt”。没有地基，编排只是空壳。</div>
+  </section>
+
+  <!-- 8 Tool agnostic -->
   <section class="slide" data-title="工具">
     <p class="kicker">adapters</p>
     <h2 class="h2">Cursor / OpenCode / 其他，同一条流程</h2>
@@ -88,12 +165,12 @@
     </div>
     <div class="terminal mt-l">
       <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>install.sh</span></div>
-<pre><span class="cmt"># 示例：按你的 Agent 改 --agent</span>
-npx skills add ballmaK/prd-build-loop-skills <span class="kw">--agent</span> cursor <span class="kw">-y</span> <span class="kw">-g</span>
-npx skills add ballmaK/prd-build-loop-skills <span class="kw">--agent</span> opencode <span class="kw">-y</span> <span class="kw">-g</span>
+<pre><span class="cmt"># 1) 先装地基：Matt Pocock Skills</span>
+npx skills add mattpocock/skills <span class="kw">--agent</span> &lt;你的工具&gt; <span class="kw">-y</span> <span class="kw">-g</span>
+<span class="cmt"># 然后在项目里跑一次 setup-matt-pocock-skills</span>
 
-<span class="cmt"># 依赖（Matt 那套）</span>
-npx skills add mattpocock/skills <span class="kw">--skill</span> grilling <span class="kw">--skill</span> tdd <span class="kw">--skill</span> handoff ...</pre>
+<span class="cmt"># 2) 再装本仓库交付编排</span>
+npx skills add ballmaK/prd-build-loop-skills <span class="kw">--agent</span> &lt;你的工具&gt; <span class="kw">-y</span> <span class="kw">-g</span></pre>
     </div>
     <div class="deck-footer"><span class="mono">agent-agnostic</span><span class="slide-number"></span></div>
     <div class="notes">现场确认大家用的工具。没有 slash 的人，教他们“按技能名说话”。</div>
@@ -273,16 +350,29 @@ npx skills add mattpocock/skills <span class="kw">--skill</span> grilling <span 
   <section class="slide" data-title="速查">
     <p class="kicker">cheat-sheet</p>
     <h2 class="h2">一页带走</h2>
-    <div class="stack mt-l">
-      <div class="agenda-row"><span class="num">author</span><span class="t">新想法写 PRD</span><span class="d">docs/prd/*</span></div>
-      <div class="agenda-row"><span class="num">reverse</span><span class="t">老项目还原</span><span class="d">docs/prd/as-is/</span></div>
-      <div class="agenda-row"><span class="num">grill</span><span class="t">成品挑战</span><span class="d">*-signoff approved</span></div>
-      <div class="agenda-row"><span class="num">build</span><span class="t">循环实现 / continue</span><span class="d">active-plan</span></div>
-      <div class="agenda-row"><span class="num">handoff</span><span class="t">会话太长就移交</span><span class="d">新会话续跑</span></div>
+    <div class="grid g2 mt-l" style="align-items:start">
+      <div>
+        <p class="kicker" style="margin-bottom:6px">本仓库编排</p>
+        <div class="stack">
+          <div class="agenda-row"><span class="num">author</span><span class="t">新想法写 PRD</span><span class="d">docs/prd</span></div>
+          <div class="agenda-row"><span class="num">reverse</span><span class="t">老项目还原</span><span class="d">as-is/</span></div>
+          <div class="agenda-row"><span class="num">grill</span><span class="t">成品挑战</span><span class="d">signoff</span></div>
+          <div class="agenda-row"><span class="num">build</span><span class="t">循环实现</span><span class="d">plan</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom:6px">Matt 地基</p>
+        <div class="stack">
+          <div class="agenda-row"><span class="num">grill*</span><span class="t">拷问对齐</span><span class="d">决策</span></div>
+          <div class="agenda-row"><span class="num">to-spec</span><span class="t">合成规格</span><span class="d">综合</span></div>
+          <div class="agenda-row"><span class="num">tdd</span><span class="t">红绿重构</span><span class="d">反馈</span></div>
+          <div class="agenda-row"><span class="num">handoff</span><span class="t">会话移交</span><span class="d">续跑</span></div>
+        </div>
+      </div>
     </div>
-    <p class="lede mt-l">安装时把 <span class="mono">--agent</span> 换成你的工具。流程不变，入口可变。</p>
+    <p class="lede mt-l">先装 <span class="mono">mattpocock/skills</span>，再装本仓库。<span class="mono">--agent</span> 换成你的工具。</p>
     <div class="deck-footer"><span class="mono">keep this page</span><span class="slide-number"></span></div>
-    <div class="notes">建议截图或收藏此页。Q&A 前停 10 秒让人拍照。</div>
+    <div class="notes">建议截图。左边编排、右边地基，对应“我们组合什么”。</div>
   </section>
 
   <!-- 14 Close -->
