@@ -1,19 +1,27 @@
 # Training materials
 
 > **工作分支：** `cursor/training-content-3278`  
-> 后续培训相关内容（讲义、PPT、实操 lab、速查卡等）统一在此分支新增，再合入 `main`。
+> 后续培训相关内容统一在此分支新增，再合入 `main`。
 
-## 现有材料
+## 分期规划
 
-| 材料 | 路径 | 说明 |
-| ---- | ---- | ---- |
-| 培训 HTML PPT（html-ppt） | [`../briefings/training-html-ppt/`](../briefings/training-html-ppt/) | 工具无关培训叙事，含 Matt Skills 简介 |
-| 领导汇报 HTML | [`../briefings/prd-build-loop-training.html`](../briefings/prd-build-loop-training.html) / exec 版 | 早期单文件稿，可作对照 |
-| 现场实操 lab | [`pulse-notes-lab/`](./pulse-notes-lab/) | PulseNotes 场景：学员手册 + 教练脚本 + starter/legacy |
+| 期次 | 主题 | 目录 | 形态 |
+| ---- | ---- | ---- | ---- |
+| **一期** | Matt Skills 理论分享 | [`phase-1-matt-theory/`](./phase-1-matt-theory/) | 分享会（心智模型） |
+| 二期 | 安装与触发共建 | 待建 | 工作坊 |
+| 三期 | PulseNotes 绿场实操 | [`pulse-notes-lab/`](./pulse-notes-lab/) | 现场 lab |
+| 四期 | 棕地逆向 / 改造 | 待加强 | 进阶 lab |
+
+## 幻灯片
+
+| 材料 | 路径 |
+| ---- | ---- |
+| 一期 Matt 理论分享 | [`../briefings/matt-theory-share/`](../briefings/matt-theory-share/) |
+| 综合培训 deck（含跟练叙事） | [`../briefings/training-html-ppt/`](../briefings/training-html-ppt/) |
 
 ## 约定
 
-1. 新培训内容优先放在 `docs/training/`（lab / 讲义）或 `docs/briefings/`（幻灯片）
-2. 保持**工具无关**（Cursor / OpenCode / 其他 Agent）
-3. 实操材料尽量带：学员手册、教练脚本、检查清单、样例（答疑用）
+1. 新内容优先放 `docs/training/`（讲义/lab）或 `docs/briefings/`（幻灯片）
+2. 保持工具无关（Cursor / OpenCode / 其他）
+3. 每一期尽量具备：README + 教练脚本 + 学员可带走纲要/PPT
 4. 完成一轮后开 PR 合入 `main`
