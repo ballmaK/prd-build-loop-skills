@@ -1,0 +1,6 @@
+# 忽略训练过程中的噪音
+node_modules/
+.ralph-logs/
+.ralph-stop
+.scratch/
+*.log
