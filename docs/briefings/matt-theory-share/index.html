@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>一期分享 · Matt Skills 与 AI 落地心智模型</title>
+<title>一期分享 · Matt 技能体系与 AI 落地心智模型</title>
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/animations/animations.css">
@@ -15,253 +15,254 @@
 
 <div class="deck">
 
-  <!-- 1 Cover -->
+  <!-- 1 封面 -->
   <section class="slide" data-title="开场">
-    <p class="kicker">phase-1 / sharing · not a coding lab</p>
+    <p class="kicker">一期分享 · 理论课，不写代码</p>
     <h1 class="h1 anim-fade-up" data-anim="fade-up">先把地图画清<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">再谈 AI 提效</span></h1>
-    <p class="lede mt-m">一期分享：Matt Pocock Skills 理论。让大家对 AI 开发落地有整体心智模型——今天不写代码，下几期再动手。</p>
+    <p class="lede mt-m">今天一起认识 Matt Pocock 这套技能体系，弄清 AI 开发落地的整体思路。不装环境、不写代码；后面几期再动手。</p>
     <div class="row wrap mt-l" style="gap:8px">
-      <span class="pill pill-accent">mattpocock/skills</span>
-      <span class="pill">35–45 min</span>
-      <span class="pill">tool-agnostic</span>
-      <span class="pill">S = presenter</span>
+      <span class="pill pill-accent">Matt 技能体系</span>
+      <span class="pill">约 40 分钟</span>
+      <span class="pill">不限工具</span>
+      <span class="pill">按 S 看演讲者视图</span>
     </div>
     <div class="speaker">
       <div class="av"></div>
-      <div><b>Team Sharing</b><span>theory first · practice later</span></div>
+      <div><b>团队内部分享</b><span>先建立共识 · 再做实操</span></div>
     </div>
-    <div class="deck-footer"><span class="mono">#skills #ai-engineering</span><span class="slide-number"></span></div>
-    <div class="notes">明确：这是分享不是装环境课。成功标准是带走一张地图。</div>
+    <div class="deck-footer"><span class="mono">AI 研发落地 · 第一课</span><span class="slide-number"></span></div>
+    <div class="notes">开场就说清楚：这是分享，不是装机课。成功标准是带走一张地图。</div>
   </section>
 
-  <!-- 2 Agenda -->
+  <!-- 2 议程 -->
   <section class="slide" data-title="议程">
-    <p class="kicker">agenda.toml</p>
-    <h2 class="h2">今天只讲五件事</h2>
+    <p class="kicker">今天怎么讲</p>
+    <h2 class="h2">一共五件事</h2>
     <div class="stack mt-l anim-stagger-list" data-anim-target>
-      <div class="agenda-row"><span class="num">01</span><span class="t">为什么「快」交不出货</span><span class="d">~5min</span></div>
-      <div class="agenda-row"><span class="num">02</span><span class="t">四类翻车与解药</span><span class="d">~10min</span></div>
-      <div class="agenda-row"><span class="num">03</span><span class="t">两类技能怎么组织</span><span class="d">~7min</span></div>
-      <div class="agenda-row"><span class="num">04</span><span class="t">一条落地开心路径</span><span class="d">~10min</span></div>
-      <div class="agenda-row"><span class="num">05</span><span class="t">和我们后续怎么接</span><span class="d">~8min</span></div>
+      <div class="agenda-row"><span class="num">01</span><span class="t">为什么光「快」交不出货</span><span class="d">约 5 分钟</span></div>
+      <div class="agenda-row"><span class="num">02</span><span class="t">四类翻车和对应解药</span><span class="d">约 10 分钟</span></div>
+      <div class="agenda-row"><span class="num">03</span><span class="t">两类技能怎么组织</span><span class="d">约 7 分钟</span></div>
+      <div class="agenda-row"><span class="num">04</span><span class="t">一条可落地的完整路径</span><span class="d">约 10 分钟</span></div>
+      <div class="agenda-row"><span class="num">05</span><span class="t">和我们后续培训怎么接</span><span class="d">约 8 分钟</span></div>
     </div>
-    <div class="deck-footer"><span class="mono">share agenda</span><span class="slide-number"></span></div>
-    <div class="notes">告诉大家：不展开安装细节，问答可以提，深度装机放二期。</div>
+    <div class="deck-footer"><span class="mono">议程</span><span class="slide-number"></span></div>
+    <div class="notes">说明：安装细节先不展开，问答可以提，装机放到二期。</div>
   </section>
 
-  <!-- 3 Why -->
+  <!-- 3 痛点 -->
   <section class="slide" data-title="为什么">
-    <p class="kicker">// context</p>
-    <h2 class="h2">Agent 能写，不代表项目能交</h2>
+    <p class="kicker">先对齐现象</p>
+    <h2 class="h2">AI 会写代码，不代表项目能交出去</h2>
     <div class="grid g2 mt-l anim-stagger-list" data-anim-target>
-      <div class="card card-accent"><h4>自由发挥</h4><p class="dim">一次丢进整页需求，输出又长又飘，范围悄悄膨胀。</p><span class="tag mt-s">vibe coding</span></div>
-      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>缺少反馈</h4><p class="dim">看起来像对的代码，一跑就挂；没人规定红绿节奏。</p><span class="tag mt-s">no loop</span></div>
-      <div class="card card-accent"><h4>会话失忆</h4><p class="dim">上下文塞满后质量断崖，也没有正式移交。</p><span class="tag mt-s">no handoff</span></div>
-      <div class="card card-accent" style="border-top-color:var(--accent-3)"><h4>大框架接管</h4><p class="dim">流程被黑盒化，出问题难改、难插人的判断。</p><span class="tag mt-s">loss of control</span></div>
+      <div class="card card-accent"><h4>自由发挥</h4><p class="dim">整页需求一次丢进去，结果又长又飘，范围悄悄膨胀。</p><span class="tag mt-s">想到哪写到哪</span></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>缺少反馈</h4><p class="dim">看起来像对的，一跑就挂；也没有「先测后写」的节奏。</p><span class="tag mt-s">盲飞</span></div>
+      <div class="card card-accent"><h4>会话失忆</h4><p class="dim">对话塞满后质量断崖，也没有正式的接手说明。</p><span class="tag mt-s">上下文崩了</span></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-3)"><h4>大框架接管</h4><p class="dim">流程变成黑盒，出问题难改，人的判断插不进去。</p><span class="tag mt-s">失去控制权</span></div>
     </div>
-    <div class="deck-footer"><span class="mono">fast ≠ shippable</span><span class="slide-number"></span></div>
-    <div class="notes">举手：上周你中了哪一类？把分享钉在真实痛点上。</div>
+    <div class="deck-footer"><span class="mono">快 ≠ 能交付</span><span class="slide-number"></span></div>
+    <div class="notes">请举手：上周你中了哪一类？把分享钉在真实痛点上。</div>
   </section>
 
-  <!-- 4 Claim -->
+  <!-- 4 主张 -->
   <section class="slide" data-title="主张">
-    <p class="kicker">thesis</p>
-    <h2 class="h2">Matt Skills：小而可组合的工程技能，不抢走控制权</h2>
+    <p class="kicker">核心观点</p>
+    <h2 class="h2">Matt 这套技能：小而能组合，不抢走控制权</h2>
     <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
-      <div class="card card-accent"><h4>小</h4><p class="dim">一个 skill 只解决一类失败模式。</p></div>
-      <div class="card card-accent"><h4>可改</h4><p class="dim">拷到本地就能 hack 成团队版。</p></div>
-      <div class="card card-accent"><h4>可组合</h4><p class="dim">串成你的链路，而不是买一套黑盒流程。</p></div>
+      <div class="card card-accent"><h4>小</h4><p class="dim">一个技能只对付一类翻车。</p></div>
+      <div class="card card-accent"><h4>能改</h4><p class="dim">拷到本地就能改成团队自己的版本。</p></div>
+      <div class="card card-accent"><h4>能组合</h4><p class="dim">串成你们的链路，而不是买一套黑盒流程。</p></div>
     </div>
-    <p class="lede mt-l">对立面：试图「拥有整个研发过程」的大框架。Matt 的选择是：<b style="color:#fff">工程基本功变得更重要，而不是更少。</b></p>
-    <div class="deck-footer"><span class="mono">skills for real engineers</span><span class="slide-number"></span></div>
-    <div class="notes">点名仓库 github.com/mattpocock/skills。强调模型无关。</div>
+    <p class="lede mt-l">它反对的是：试图「包办整个研发过程」的大框架。Matt 的判断是：<b style="color:#fff">有了 AI，工程基本功不是更不重要，而是更重要。</b></p>
+    <div class="deck-footer"><span class="mono">给真人工程师用的技能</span><span class="slide-number"></span></div>
+    <div class="notes">可提仓库名，但别让大家死记英文地址；强调跟哪个 AI 工具无关。</div>
   </section>
 
-  <!-- 5 Four failures -->
+  <!-- 5 四翻车 -->
   <section class="slide" data-title="四翻车">
-    <p class="kicker">failure-modes</p>
+    <p class="kicker">理论主干</p>
     <h2 class="h2">四类翻车，四组解药</h2>
     <div class="grid g2 mt-l anim-stagger-list" data-anim-target>
-      <div class="card card-accent"><h4>01 做的不是我想要的</h4><p class="dim">沟通错位最致命。</p><span class="tag mt-s">grill-me / grill-with-docs</span></div>
-      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>02 说话又长又飘</h4><p class="dim">没有共享领域语言。</p><span class="tag mt-s">CONTEXT.md · domain-modeling</span></div>
-      <div class="card card-accent"><h4>03 代码跑不通</h4><p class="dim">反馈环太弱，盲飞。</p><span class="tag mt-s">tdd · diagnosing-bugs</span></div>
-      <div class="card card-accent" style="border-top-color:var(--accent-3)"><h4>04 系统糊成泥球</h4><p class="dim">写得越快，结构烂得越快。</p><span class="tag mt-s">to-spec · improve-architecture</span></div>
+      <div class="card card-accent"><h4>01 做的不是我想要的</h4><p class="dim">沟通错位最致命。</p><span class="tag mt-s">拷问对齐</span></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>02 说话又长又飘</h4><p class="dim">没有项目里的共同黑话。</p><span class="tag mt-s">领域词表</span></div>
+      <div class="card card-accent"><h4>03 代码跑不通</h4><p class="dim">反馈太弱，只能盲飞。</p><span class="tag mt-s">测试驱动</span></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-3)"><h4>04 系统糊成一锅粥</h4><p class="dim">写得越快，结构烂得越快。</p><span class="tag mt-s">模块与架构</span></div>
     </div>
-    <div class="deck-footer"><span class="mono">diagnose before tooling</span><span class="slide-number"></span></div>
-    <div class="notes">这是理论主干。每类只举一个生活化例子，别展开 API。</div>
+    <div class="deck-footer"><span class="mono">先看病，再选工具</span><span class="slide-number"></span></div>
+    <div class="notes">这是主干。每类举一个生活化例子即可，别展开命令细节。</div>
   </section>
 
-  <!-- 6 Grill -->
+  <!-- 6 拷问 -->
   <section class="slide" data-title="拷问">
-    <p class="kicker">deep-dive · alignment</p>
+    <p class="kicker">重点一 · 对齐</p>
     <h2 class="h2">最关键的解药：先对齐，再动手</h2>
     <div class="grid g2 mt-l" style="align-items:start">
       <div>
-        <p class="lede">grilling 纪律：一次只问一个问题；给出推荐答案；事实查仓库；决策等人确认；没共识前不实现。</p>
+        <p class="lede">拷问纪律就四条：一次只问一个问题；给出你的推荐答案；仓库里查得到的别装傻问；决策等人确认。没达成共识前，不写实现。</p>
         <div class="mt-l">
-          <span class="pill pill-accent">grill-me</span>
-          <span class="pill">grilling</span>
-          <span class="pill">grill-with-docs</span>
+          <span class="pill pill-accent">拷问我</span>
+          <span class="pill">拷问原语</span>
+          <span class="pill">拷问并写文档</span>
         </div>
+        <p class="dim mt-m" style="font-size:13px">对应技能名：grill-me / grilling / grill-with-docs</p>
       </div>
       <div class="terminal">
-        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>rule.txt</span></div>
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>纪律备忘</span></div>
 <pre><span class="cmt"># 拷问时</span>
-Ask <span class="fn">one</span> question at a time
-Recommend an answer
-Look up <span class="str">facts</span> in the repo
-Wait for <span class="kw">human</span> decisions
+一次只问 <span class="fn">一个</span> 问题
+给出推荐答案
+<span class="str">事实</span> 自己去仓库查
+<span class="kw">决策</span> 等人来定
 
 <span class="cmt"># 没对齐前</span>
-Do <span class="kw">not</span> implement</pre>
+<span class="kw">不要</span> 开始写代码</pre>
       </div>
     </div>
-    <div class="deck-footer"><span class="mono">grilling first</span><span class="slide-number"></span></div>
-    <div class="notes">可口头对比：直接“帮我做完” vs 先 grill 三五个关键决策。</div>
+    <div class="deck-footer"><span class="mono">先问清楚，再动手</span><span class="slide-number"></span></div>
+    <div class="notes">口头对比：直接说“帮我全做完” vs 先对齐三五个关键决策。</div>
   </section>
 
-  <!-- 7 Shared language -->
+  <!-- 7 语言 -->
   <section class="slide" data-title="语言">
-    <p class="kicker">deep-dive · language</p>
-    <h2 class="h2">共享语言：让 Agent 少说废话</h2>
+    <p class="kicker">重点二 · 共同语言</p>
+    <h2 class="h2">共享语言：让 AI 少说废话</h2>
     <div class="grid g2 mt-l">
       <div class="card">
-        <h4 class="dim">Before</h4>
+        <h4 class="dim">以前</h4>
         <p class="lede" style="font-size:18px">「课程某节在区段里被变成文件系统里的真实位置时出问题……」</p>
       </div>
       <div class="card card-accent">
-        <h4>After · CONTEXT.md</h4>
-        <p class="lede" style="font-size:18px;color:#fff">「materialization cascade 有问题。」</p>
+        <h4>有了词表之后</h4>
+        <p class="lede" style="font-size:18px;color:#fff">「物化级联出问题了。」</p>
       </div>
     </div>
-    <p class="lede mt-l">收益不只是短：命名一致、更好导航、更少无效思考 token。这是 `grill-with-docs` / `domain-modeling` 的核心产物。</p>
-    <div class="deck-footer"><span class="mono">ubiquitous language</span><span class="slide-number"></span></div>
-    <div class="notes">问：你们项目有没有 glossary？没有的话这就是低成本高回报的第一步。</div>
+    <p class="lede mt-l">好处不只是句子短：命名更一致、更好找代码、也少浪费无效推理。这通常来自「拷问并写文档」和「领域建模」。</p>
+    <div class="deck-footer"><span class="mono">项目黑话要对齐</span><span class="slide-number"></span></div>
+    <div class="notes">问：你们项目有没有术语表？没有的话，这是投入小、收益大的第一步。</div>
   </section>
 
-  <!-- 8 Two kinds -->
+  <!-- 8 两类 -->
   <section class="slide" data-title="两类">
-    <p class="kicker">architecture-of-skills</p>
-    <h2 class="h2">两类技能：编排入口 vs 可复用纪律</h2>
+    <p class="kicker">技能怎么组织</p>
+    <h2 class="h2">两类技能：人喊的入口，和可复用的纪律</h2>
     <div class="grid g2 mt-l">
       <div class="card card-accent">
-        <h4>User-invoked</h4>
-        <p class="dim mt-s">只有你触发才跑。负责编排。</p>
-        <p class="mono mt-m" style="color:var(--accent);font-size:14px">/grill-me · /to-spec · /implement</p>
+        <h4>人主动触发</h4>
+        <p class="dim mt-s">只有你喊它才跑，负责编排整段流程。</p>
+        <p class="mt-m" style="color:var(--accent);font-size:15px">例如：拷问我、写成规格、按票实现</p>
       </div>
       <div class="card card-accent" style="border-top-color:var(--accent-2)">
-        <h4>Model-invoked</h4>
-        <p class="dim mt-s">你或 Agent 都可调用。负责纪律。</p>
-        <p class="mono mt-m" style="color:var(--accent-2);font-size:14px">grilling · tdd · domain-modeling</p>
+        <h4>可被自动调用</h4>
+        <p class="dim mt-s">你或 AI 都可以调用，负责具体纪律。</p>
+        <p class="mt-m" style="color:var(--accent-2);font-size:15px">例如：拷问原语、测试驱动、领域建模</p>
       </div>
     </div>
-    <p class="lede mt-l">规则：用户技能可以调用模型技能；<b style="color:#fff">用户技能之间不互相调用</b>。所以 `/grill-me` 很薄——它主要是去跑 `/grilling`。</p>
-    <div class="deck-footer"><span class="mono">compose, don’t nest UIs</span><span class="slide-number"></span></div>
-    <div class="notes">这页帮大家以后读 SKILL.md 时不迷糊。</div>
+    <p class="lede mt-l">规则：入口可以调用纪律；<b style="color:#fff">入口和入口之间不互相套娃</b>。所以「拷问我」很薄——它主要是去跑「拷问原语」。</p>
+    <div class="deck-footer"><span class="mono">组合，不叠床架屋</span><span class="slide-number"></span></div>
+    <div class="notes">帮助大家以后看到技能文件时不迷糊：谁是入口，谁是纪律。</div>
   </section>
 
-  <!-- 9 Happy path -->
+  <!-- 9 路径 -->
   <section class="slide" data-title="路径">
-    <p class="kicker">happy-path</p>
-    <h2 class="h2">一条 AI 落地的开心路径</h2>
+    <p class="kicker">落地简图</p>
+    <h2 class="h2">一条 AI 落地的完整路径</h2>
     <div class="stack mt-l">
-      <div class="agenda-row"><span class="num">01</span><span class="t">setup-matt-pocock-skills</span><span class="d">每仓一次</span></div>
-      <div class="agenda-row"><span class="num">02</span><span class="t">grill-with-docs</span><span class="d">对齐 + 领域</span></div>
-      <div class="agenda-row"><span class="num">03</span><span class="t">to-spec</span><span class="d">只综合，不面试</span></div>
-      <div class="agenda-row"><span class="num">04</span><span class="t">to-tickets</span><span class="d">竖切 + 依赖</span></div>
-      <div class="agenda-row"><span class="num">05</span><span class="t">implement + tdd</span><span class="d">小步反馈</span></div>
-      <div class="agenda-row"><span class="num">06</span><span class="t">code-review / handoff</span><span class="d">验收或续跑</span></div>
+      <div class="agenda-row"><span class="num">01</span><span class="t">项目初始化配置</span><span class="d">每个仓库一次</span></div>
+      <div class="agenda-row"><span class="num">02</span><span class="t">拷问并对齐文档</span><span class="d">目标 + 术语</span></div>
+      <div class="agenda-row"><span class="num">03</span><span class="t">综合成规格</span><span class="d">只总结，不再追问</span></div>
+      <div class="agenda-row"><span class="num">04</span><span class="t">拆成可领取任务</span><span class="d">竖着切，带依赖</span></div>
+      <div class="agenda-row"><span class="num">05</span><span class="t">小步实现 + 测试先行</span><span class="d">有反馈再往前</span></div>
+      <div class="agenda-row"><span class="num">06</span><span class="t">评审验收或会话移交</span><span class="d">做完或续跑</span></div>
     </div>
-    <div class="deck-footer"><span class="mono">align → spec → slice → build</span><span class="slide-number"></span></div>
-    <div class="notes">强调 to-spec 不再拷问。大需求可提 wayfinder 一句带过。</div>
+    <div class="deck-footer"><span class="mono">对齐 → 规格 → 拆工 → 实现</span><span class="slide-number"></span></div>
+    <div class="notes">强调：写成规格这一步不再拷问。特别大的需求，可以先探路再拆票。</div>
   </section>
 
-  <!-- 10 Feedback -->
+  <!-- 10 反馈 -->
   <section class="slide" data-title="反馈">
-    <p class="kicker">speed-limit</p>
-    <h2 class="h2">反馈环是你的速度上限</h2>
+    <p class="kicker">速度上限</p>
+    <h2 class="h2">反馈环，就是你的速度上限</h2>
     <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
-      <div class="card card-accent"><h4>红</h4><p class="dim">先写失败测试，钉住要的行为。</p></div>
-      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>绿</h4><p class="dim">最小实现让测试通过。</p></div>
-      <div class="card card-accent"><h4>重构</h4><p class="dim">在绿的保护下整理设计。</p></div>
+      <div class="card card-accent"><h4>红</h4><p class="dim">先写失败的测试，钉住你要的行为。</p></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>绿</h4><p class="dim">用最小改动让测试通过。</p></div>
+      <div class="card card-accent"><h4>重构</h4><p class="dim">在绿色保护下，再把设计整理干净。</p></div>
     </div>
-    <p class="lede mt-l">对齐之后仍然写出垃圾？看反馈，不看态度。`tdd` 是把这节奏变成默认动作；调试则用 `diagnosing-bugs`。</p>
-    <div class="deck-footer"><span class="mono">red → green → refactor</span><span class="slide-number"></span></div>
-    <div class="notes">可问：你们现在 AI 写码有没有强制测试先行？</div>
+    <p class="lede mt-l">对齐之后仍然写出垃圾？先看反馈，别急着怪态度。测试驱动把这节奏变成默认动作；难查的 bug 再用诊断流程。</p>
+    <div class="deck-footer"><span class="mono">红 → 绿 → 重构</span><span class="slide-number"></span></div>
+    <div class="notes">可问：你们现在让 AI 写码，有没有强制测试先行？</div>
   </section>
 
-  <!-- 11 Bridge -->
+  <!-- 11 衔接 -->
   <section class="slide" data-title="衔接">
-    <p class="kicker">how-we-compose</p>
+    <p class="kicker">和我们怎么接</p>
     <h2 class="h2">Matt 是地基，我们还有交付操作系统</h2>
     <div class="grid g2 mt-l">
       <div class="card card-accent">
-        <h4>Matt Pocock Skills</h4>
-        <p class="dim mt-s">拷问、领域语言、TDD、评审、移交——工程原语。</p>
-        <div class="mt-m"><span class="pill">grilling</span><span class="pill">tdd</span><span class="pill">handoff</span></div>
+        <h4>Matt 这套技能</h4>
+        <p class="dim mt-s">拷问、领域词、测试驱动、评审、移交——工程基本功。</p>
+        <div class="mt-m"><span class="pill">拷问</span><span class="pill">测试驱动</span><span class="pill">会话移交</span></div>
       </div>
       <div class="card card-accent" style="border-top-color:var(--accent-2)">
-        <h4>prd-build-loop-skills</h4>
-        <p class="dim mt-s">PRD 生成/逆向、签核门、竖切计划、循环实现——交付编排。</p>
-        <div class="mt-m"><span class="pill pill-accent">author</span><span class="pill pill-accent">grill</span><span class="pill pill-accent">reverse</span><span class="pill pill-accent">build-loop</span></div>
+        <h4>我们仓库的编排</h4>
+        <p class="dim mt-s">需求生成/逆向、签核过门、竖切计划、循环实现——交付操作系统。</p>
+        <div class="mt-m"><span class="pill pill-accent">写需求</span><span class="pill pill-accent">挑战门</span><span class="pill pill-accent">逆向</span><span class="pill pill-accent">循环实现</span></div>
       </div>
     </div>
     <div class="terminal mt-l">
-      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>mental-model.txt</span></div>
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>心智模型</span></div>
 <pre><span class="cmt"># 一期只要记住</span>
-Matt primitives  →  可组合纪律
-Our orchestration →  业务交付路径
+Matt 的小技能   →  可组合的纪律
+我们的编排能力 →  业务交付路径
 
 <span class="cmt"># 三期才会实操</span>
-idea → author/grill → build-loop → ship</pre>
+想法 → 写需求/挑战 → 循环实现 → 交付</pre>
     </div>
-    <div class="deck-footer"><span class="mono">foundation + operating system</span><span class="slide-number"></span></div>
-    <div class="notes">一期不要深讲我们 skill 细节，只要分工清楚。</div>
+    <div class="deck-footer"><span class="mono">地基 + 操作系统</span><span class="slide-number"></span></div>
+    <div class="notes">一期不要深讲我们仓库细节，分工说清楚即可。</div>
   </section>
 
-  <!-- 12 Roadmap -->
+  <!-- 12 分期 -->
   <section class="slide" data-title="分期">
-    <p class="kicker">program-roadmap</p>
-    <h2 class="h2">培训怎么分期</h2>
+    <p class="kicker">后续怎么排</p>
+    <h2 class="h2">培训分四期走</h2>
     <div class="stack mt-l">
-      <div class="agenda-row"><span class="num">P1</span><span class="t">Matt 理论分享（今天）</span><span class="d">地图</span></div>
-      <div class="agenda-row"><span class="num">P2</span><span class="t">安装与触发共建</span><span class="d">工具无关</span></div>
-      <div class="agenda-row"><span class="num">P3</span><span class="t">PulseNotes 绿场实操</span><span class="d">跑通</span></div>
-      <div class="agenda-row"><span class="num">P4</span><span class="t">棕地逆向 / 改造</span><span class="d">进阶</span></div>
+      <div class="agenda-row"><span class="num">一</span><span class="t">Matt 理论分享（今天）</span><span class="d">先有地图</span></div>
+      <div class="agenda-row"><span class="num">二</span><span class="t">安装与触发共建</span><span class="d">不限工具</span></div>
+      <div class="agenda-row"><span class="num">三</span><span class="t">PulseNotes 新品实操</span><span class="d">跑通一遍</span></div>
+      <div class="agenda-row"><span class="num">四</span><span class="t">老项目逆向与改造</span><span class="d">进阶</span></div>
     </div>
-    <p class="lede mt-l">今天回去只要能向同事讲清「四类翻车 + 一条开心路径」，一期就达标。</p>
-    <div class="deck-footer"><span class="mono">crawl → walk → run</span><span class="slide-number"></span></div>
-    <div class="notes">收集二期意愿：谁需要装机结对。</div>
+    <p class="lede mt-l">今天回去，只要能跟同事讲清「四类翻车 + 一条完整路径」，一期就算达标。</p>
+    <div class="deck-footer"><span class="mono">先走，再跑</span><span class="slide-number"></span></div>
+    <div class="notes">收尾前收集二期意愿：谁需要结对装机。</div>
   </section>
 
-  <!-- 13 Takeaways -->
+  <!-- 13 带走 -->
   <section class="slide" data-title="带走">
-    <p class="kicker">takeaways</p>
+    <p class="kicker">请记住</p>
     <h2 class="h2">带走三句话</h2>
     <div class="stack mt-l">
-      <div class="agenda-row"><span class="num">1</span><span class="t">先对齐，再动手</span><span class="d">grilling</span></div>
-      <div class="agenda-row"><span class="num">2</span><span class="t">反馈环是速度上限</span><span class="d">tdd</span></div>
-      <div class="agenda-row"><span class="num">3</span><span class="t">小技能组合大于大框架接管</span><span class="d">compose</span></div>
+      <div class="agenda-row"><span class="num">1</span><span class="t">先对齐，再动手</span><span class="d">拷问</span></div>
+      <div class="agenda-row"><span class="num">2</span><span class="t">反馈环是速度上限</span><span class="d">测试驱动</span></div>
+      <div class="agenda-row"><span class="num">3</span><span class="t">小技能组合，大于大框架接管</span><span class="d">组合</span></div>
     </div>
     <div class="row wrap mt-l" style="gap:8px">
-      <span class="pill pill-accent">github.com/mattpocock/skills</span>
-      <span class="pill">skills.sh/mattpocock/skills</span>
+      <span class="pill pill-accent">仓库：mattpocock/skills</span>
+      <span class="pill">可按兴趣课后自查</span>
     </div>
-    <div class="deck-footer"><span class="mono">remember these three</span><span class="slide-number"></span></div>
-    <div class="notes">请每人写下“我会先试的一个技能名”，然后进入 Q&A。</div>
+    <div class="deck-footer"><span class="mono">就记这三句</span><span class="slide-number"></span></div>
+    <div class="notes">请每人写下“我会先试的一个做法”，然后进入答疑。</div>
   </section>
 
-  <!-- 14 Close -->
+  <!-- 14 结束 -->
   <section class="slide" data-title="结束">
-    <p class="kicker">close · q&amp;a</p>
+    <p class="kicker">答疑时间</p>
     <h1 class="h1 anim-fade-up" data-anim="fade-up">工程基本功没有过时<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">AI 让它更重要</span></h1>
-    <p class="lede mt-m">一期分享到此。下期：把技能装进你的 Agent，学会用产物路径验收。</p>
+    <p class="lede mt-m">一期分享到这里。下期：把技能装进你的 AI 工具，学会用产物路径判断有没有做对。</p>
     <div class="row wrap mt-l" style="gap:8px">
-      <span class="pill pill-accent">Q&amp;A</span>
-      <span class="pill">带问题来，不带安装手册焦虑</span>
+      <span class="pill pill-accent">欢迎提问</span>
+      <span class="pill">先聊思路，装机细节放二期</span>
     </div>
-    <div class="deck-footer"><span class="mono">thanks · see you in phase 2</span><span class="slide-number"></span></div>
-    <div class="notes">优先回答心智模型问题；装机类收到二期清单。</div>
+    <div class="deck-footer"><span class="mono">谢谢 · 二期见</span><span class="slide-number"></span></div>
+    <div class="notes">优先回答心智模型问题；装机类记到二期清单。</div>
   </section>
 
 </div>
