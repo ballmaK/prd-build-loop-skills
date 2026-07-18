@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>一期分享 · 三个开工场景：新品 / 续接 / 老改</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="tpl-tech-sharing"
+  data-themes="tokyo-night,engineering-whiteprint,minimal-white,corporate-clean,swiss-grid"
+  data-theme-base="assets/themes/">
+
+<div class="deck">
+
+  <!-- 1 封面 -->
+  <section class="slide" data-title="开场">
+    <p class="kicker">一期分享 · 场景加讨论</p>
+    <h1 class="h1 anim-fade-up" data-anim="fade-up">先认清你怎么开工<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">再谈 AI 怎么提效</span></h1>
+    <p class="lede mt-m">今天不背技能清单。就看三种真实状态：PRD 还不明确的新品、写了一截要续接、几乎没文档的老系统。先看坑，再看路径，最后讨论。</p>
+    <div class="row wrap mt-l" style="gap:8px">
+      <span class="pill pill-accent">三个场景</span>
+      <span class="pill">约 50～60 分钟</span>
+      <span class="pill">中文话术</span>
+      <span class="pill">按 S 看备注</span>
+    </div>
+    <div class="speaker">
+      <div class="av"></div>
+      <div><b>团队内部分享</b><span>从明天怎么开工说起</span></div>
+    </div>
+    <div class="deck-footer"><span class="mono">场景驱动，不是理论清单</span><span class="slide-number"></span></div>
+    <div class="notes">请大家先在心里选：我最近最像场景 1、2 还是 3？后面举手统计。</div>
+  </section>
+
+  <!-- 2 议程 -->
+  <section class="slide" data-title="议程">
+    <p class="kicker">今天怎么走</p>
+    <h2 class="h2">主线很简单：认场景，避坑，选路径</h2>
+    <div class="stack mt-l anim-stagger-list" data-anim-target>
+      <div class="agenda-row"><span class="num">01</span><span class="t">场景 1 · 新品，PRD 还不明确</span><span class="d">约 15 分</span></div>
+      <div class="agenda-row"><span class="num">02</span><span class="t">场景 2 · 在建，有代码要续接</span><span class="d">约 15 分</span></div>
+      <div class="agenda-row"><span class="num">03</span><span class="t">场景 3 · 老改，几乎无文档</span><span class="d">约 15 分</span></div>
+      <div class="agenda-row"><span class="num">04</span><span class="t">三场景对照 + 共同地基</span><span class="d">约 5 分</span></div>
+      <div class="agenda-row"><span class="num">05</span><span class="t">分组讨论 / 答疑</span><span class="d">约 15 分</span></div>
+    </div>
+    <div class="deck-footer"><span class="mono">每个场景四拍：状态 · 坑 · 路径 · 讨论</span><span class="slide-number"></span></div>
+    <div class="notes">压缩到 45 分钟时，讨论改成全场快答两题。</div>
+  </section>
+
+  <!-- 3 总图 -->
+  <section class="slide" data-title="总图">
+    <p class="kicker">先看全貌</p>
+    <h2 class="h2">三种开工状态，三种起手式</h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
+      <div class="card card-accent">
+        <h4>场景 1 · 新品</h4>
+        <p class="dim mt-s">想法有了，PRD 还不够落地</p>
+        <span class="tag mt-m">写清，挑战，再写码</span>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)">
+        <h4>场景 2 · 续接</h4>
+        <p class="dim mt-s">已有功能，也有存量代码</p>
+        <span class="tag mt-m">先摸清现状，再补下一批</span>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-3)">
+        <h4>场景 3 · 老改</h4>
+        <p class="dim mt-s">缺需求、缺文档的历史系统</p>
+        <span class="tag mt-m">先忠实描述，再定目标态</span>
+      </div>
+    </div>
+    <p class="lede mt-l">有一条共通点：<b style="color:#fff">目标说明没过门，就别直接进实现循环。</b></p>
+    <div class="deck-footer"><span class="mono">认场景，比认工具名更重要</span><span class="slide-number"></span></div>
+    <div class="notes">举手：谁最近最像 1 / 2 / 3？把分享钉在真实分布上。</div>
+  </section>
+
+  <!-- ===== 场景 1 ===== -->
+  <section class="slide" data-title="场景1·状态">
+    <p class="kicker">场景 1 · 手头状态</p>
+    <h2 class="h2">全新项目：给到开发的需求，还不够 AI 直接落地</h2>
+    <div class="grid g2 mt-l">
+      <div class="card card-accent">
+        <h4>你大概有</h4>
+        <p class="dim mt-s">口头想法、一页粗糙说明、原型截图，或「先做个类似某某的」。</p>
+      </div>
+      <div class="card">
+        <h4 class="dim">你大概没有</h4>
+        <p class="lede mt-s" style="font-size:18px">模块边界、验收标准、非目标、关键决策。这些一缺，AI 只能猜。</p>
+      </div>
+    </div>
+    <p class="lede mt-l">实用判断：如果你不敢把当前文档直接交给另一个人独立交付，就还没到「能进实现」。</p>
+    <div class="deck-footer"><span class="mono">PRD 不明，就还不能进循环实现</span><span class="slide-number"></span></div>
+    <div class="notes">可举 PulseNotes 或组内真实新品例子。</div>
+  </section>
+
+  <section class="slide" data-title="场景1·坑">
+    <p class="kicker">场景 1 · 常见坑</p>
+    <h2 class="h2">新品最容易怎么翻车</h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
+      <div class="card card-accent"><h4>一把梭写码</h4><p class="dim">「帮我全做完」：范围膨胀，做出来的也不是你想要的。</p></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>长文不挑战</h4><p class="dim">一口气超长 PRD，歧义原样进代码。</p></div>
+      <div class="card card-accent"><h4>没有共同词</h4><p class="dim">同一概念三种叫法，AI 说话又长又飘。</p></div>
+    </div>
+    <div class="terminal mt-l">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>错误起手</span></div>
+<pre><span class="cmt"># 看起来很快</span>
+<span class="kw">直接</span>：「按这个想法把系统做出来」
+
+<span class="cmt"># 实际发生</span>
+范围悄悄变大 · 验收对不上 · 返工比从零还贵</pre>
+    </div>
+    <div class="deck-footer"><span class="mono">快开始，不等于快交付</span><span class="slide-number"></span></div>
+    <div class="notes">请一人分享：最近一次「AI 写了很多但不可用」卡在哪。</div>
+  </section>
+
+  <section class="slide" data-title="场景1·路径">
+    <p class="kicker">场景 1 · 推荐路径</p>
+    <h2 class="h2">写清，挑战，再循环实现</h2>
+    <div class="stack mt-l">
+      <div class="agenda-row"><span class="num">1</span><span class="t">拷问对齐 + 领域词表</span><span class="d">CONTEXT / 决策</span></div>
+      <div class="agenda-row"><span class="num">2</span><span class="t">合成模块化需求</span><span class="d">宏观 + 模块 PRD</span></div>
+      <div class="agenda-row"><span class="num">3</span><span class="t">成品挑战（挑战门）</span><span class="d">签核 approved</span></div>
+      <div class="agenda-row"><span class="num">4</span><span class="t">拆任务 + 测试先行小步做</span><span class="d">循环实现</span></div>
+    </div>
+    <p class="lede mt-l">编排入口：<b style="color:#fff">写需求 → 挑战门 → 循环实现</b>。底下靠拷问、词表、测试驱动撑住。</p>
+    <div class="deck-footer"><span class="mono">/prd-author → /prd-grill → /prd-build-loop</span><span class="slide-number"></span></div>
+    <div class="notes">点明：挑战门没过，实现循环应停。可 skip，但要显式记录。</div>
+  </section>
+
+  <section class="slide" data-title="场景1·讨论">
+    <p class="kicker">场景 1 · 讨论</p>
+    <h2 class="h2">先把问题抛出去</h2>
+    <div class="grid g2 mt-l">
+      <div class="card card-accent">
+        <h4>题 A</h4>
+        <p class="lede mt-s" style="font-size:18px">你最近一个新品需求，卡在哪一层：目标、边界，还是验收？</p>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)">
+        <h4>题 B</h4>
+        <p class="lede mt-s" style="font-size:18px">如果只能多做一件事再让 AI 写码，你选「拷问对齐」还是「先写测试」？为什么？</p>
+      </div>
+    </div>
+    <p class="dim mt-l">先记着，后半场分组再答。分享人可以先示范自己的答案 30 秒。</p>
+    <div class="deck-footer"><span class="mono">场景 1 讨论题</span><span class="slide-number"></span></div>
+    <div class="notes">示范方向：多数人选拷问；验收已经很清楚时，测试可以优先。</div>
+  </section>
+
+  <!-- ===== 场景 2 ===== -->
+  <section class="slide" data-title="场景2·状态">
+    <p class="kicker">场景 2 · 手头状态</p>
+    <h2 class="h2">在建项目：已有部分功能，也有存量代码，要续接</h2>
+    <div class="grid g2 mt-l">
+      <div class="card card-accent">
+        <h4>你大概有</h4>
+        <p class="dim mt-s">能跑的模块、半成品分支、零散文档或旧票、线上或联调环境。</p>
+      </div>
+      <div class="card">
+        <h4 class="dim">真正麻烦在哪</h4>
+        <p class="lede mt-s" style="font-size:18px">「已实现 / 未实现 / 说了但没做」糊成一团。新需求往上叠，旧行为没人敢碰。</p>
+      </div>
+    </div>
+    <p class="lede mt-l">续接要接的是<strong style="color:#fff">下一批变更</strong>。别假装从零重做一遍。</p>
+    <div class="deck-footer"><span class="mono">有代码，就先尊重现状</span><span class="slide-number"></span></div>
+    <div class="notes">强调：这是团队最高频场景，比纯新品更常见。</div>
+  </section>
+
+  <section class="slide" data-title="场景2·坑">
+    <p class="kicker">场景 2 · 常见坑</p>
+    <h2 class="h2">续接时最贵的三种错法</h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
+      <div class="card card-accent"><h4>当白板重写</h4><p class="dim">新需求一来就「整体重做」，踩坏已上线行为。</p></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>只补两句需求</h4><p class="dim">新旧边界对不齐，AI 在旧代码上乱接。</p></div>
+      <div class="card card-accent"><h4>没有对照表</h4><p class="dim">重复造轮子，或该改的漏改。</p></div>
+    </div>
+    <div class="terminal mt-l">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>错误起手</span></div>
+<pre><span class="cmt"># 常见一句话</span>
+<span class="kw">「</span>在现有项目上按新需求继续做<span class="kw">」</span>
+
+<span class="cmt"># 缺了什么</span>
+已实现清单 · 不可破坏行为 · 本迭代目标态范围</pre>
+    </div>
+    <div class="deck-footer"><span class="mono">续接不是绿场缩短版</span><span class="slide-number"></span></div>
+    <div class="notes">问：你们更怕改坏旧功能，还是新功能接不上？</div>
+  </section>
+
+  <section class="slide" data-title="场景2·路径">
+    <p class="kicker">场景 2 · 推荐路径</p>
+    <h2 class="h2">摸清现状，钉住旧行为，只写清下一批目标态</h2>
+    <div class="stack mt-l">
+      <div class="agenda-row"><span class="num">1</span><span class="t">对照文档 / 票 / 代码，列出已交付与缺口</span><span class="d">现状表</span></div>
+      <div class="agenda-row"><span class="num">2</span><span class="t">对改到的边界做表征（测试或关键路径清单）</span><span class="d">安全网</span></div>
+      <div class="agenda-row"><span class="num">3</span><span class="t">只为下一批变更写模块化目标态</span><span class="d">续接 PRD</span></div>
+      <div class="agenda-row"><span class="num">4</span><span class="t">挑战门通过后，再进循环实现 / 续跑</span><span class="d">过门</span></div>
+    </div>
+    <p class="lede mt-l">不必一上来全量逆向。但<strong style="color:#fff">凡是要改的边界，都得说清「现在怎样、目标怎样」。</strong></p>
+    <div class="deck-footer"><span class="mono">局部摸底 + 增量目标态 + 挑战门</span><span class="slide-number"></span></div>
+    <div class="notes">文档与代码冲突时：以可验证行为为准，冲突记入未知清单。</div>
+  </section>
+
+  <section class="slide" data-title="场景2·讨论">
+    <p class="kicker">场景 2 · 讨论</p>
+    <h2 class="h2">续接现场最想听的两问</h2>
+    <div class="grid g2 mt-l">
+      <div class="card card-accent">
+        <h4>题 A</h4>
+        <p class="lede mt-s" style="font-size:18px">「文档说有、代码没有」或反过来，你们最近一次是怎么发现的？</p>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)">
+        <h4>题 B</h4>
+        <p class="lede mt-s" style="font-size:18px">续接时你更怕改坏旧功能，还是新功能接不上？各自该先补什么产物？</p>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="mono">场景 2 讨论题</span><span class="slide-number"></span></div>
+    <div class="notes">引导：怕改坏就先表征；怕接不上就先补对照表和目标态范围。</div>
+  </section>
+
+  <!-- ===== 场景 3 ===== -->
+  <section class="slide" data-title="场景3·状态">
+    <p class="kicker">场景 3 · 手头状态</p>
+    <h2 class="h2">老旧改造：缺需求说明、缺文档的历史项目</h2>
+    <div class="grid g2 mt-l">
+      <div class="card card-accent">
+        <h4>你大概有</h4>
+        <p class="dim mt-s">能跑（或勉强能跑）的代码、口口相传、零星工单、生产上的「潜规则」。</p>
+      </div>
+      <div class="card">
+        <h4 class="dim">你几乎没有</h4>
+        <p class="lede mt-s" style="font-size:18px">可信的需求说明、架构说明、验收基线。行为主要活在代码和人口里。</p>
+      </div>
+    </div>
+    <p class="lede mt-l">这类项目的第一目标通常不是「写得更快」，而是<strong style="color:#fff">改完还认得自己</strong>。</p>
+    <div class="deck-footer"><span class="mono">没文档，也不等于可以瞎改</span><span class="slide-number"></span></div>
+    <div class="notes">可点：重构、迁移、换皮、抽服务，起手式都是先忠实。</div>
+  </section>
+
+  <section class="slide" data-title="场景3·坑">
+    <p class="kicker">场景 3 · 常见坑</p>
+    <h2 class="h2">老改最容易踩的雷</h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
+      <div class="card card-accent"><h4>整仓重构</h4><p class="dim">「让 AI 重构整个项目」：暗逻辑漂移，线上事故。</p></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>现状当待办</h4><p class="dim">把「现状描述」喂给实现循环，等于把现在当成目标。</p></div>
+      <div class="card card-accent"><h4>不签核就改</h4><p class="dim">忠实度没人认，改完才发现漏了分支逻辑。</p></div>
+    </div>
+    <div class="terminal mt-l">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>铁律</span></div>
+<pre><span class="str">现状</span>  = 忠实描述「现在是什么」（As-Is）
+<span class="fn">目标态</span>  = 明确「我们要改成什么」（To-Be）
+
+<span class="kw">禁止</span>：只有现状文档就进入循环实现</pre>
+    </div>
+    <div class="deck-footer"><span class="mono">现状描述不是实现待办</span><span class="slide-number"></span></div>
+    <div class="notes">这是本场最硬的一条规则，收束时还要再说一遍。</div>
+  </section>
+
+  <section class="slide" data-title="场景3·路径">
+    <p class="kicker">场景 3 · 推荐路径</p>
+    <h2 class="h2">逆向，签核，表征，再定改造目标</h2>
+    <div class="stack mt-l">
+      <div class="agenda-row"><span class="num">1</span><span class="t">代码考古，产出模块化现状文档</span><span class="d">系统图 / 债务 / 未知</span></div>
+      <div class="agenda-row"><span class="num">2</span><span class="t">忠实度签核</span><span class="d">reverse-signoff</span></div>
+      <div class="agenda-row"><span class="num">3</span><span class="t">表征基线：关键行为钉成测试或清单</span><span class="d">安全网</span></div>
+      <div class="agenda-row"><span class="num">4</span><span class="t">写目标态 / 迁移计划 → 挑战门 → 实现</span><span class="d">与后半段汇合</span></div>
+    </div>
+    <p class="lede mt-l">编排入口先是<b style="color:#fff">逆向</b>，然后才是挑战与循环实现。前半段慢一点，后半段才敢加速。</p>
+    <div class="deck-footer"><span class="mono">/prd-reverse → 表征 → 目标态 → /prd-grill → /prd-build-loop</span><span class="slide-number"></span></div>
+    <div class="notes">未知清单要公开：不知道的，比假装知道更安全。</div>
+  </section>
+
+  <section class="slide" data-title="场景3·讨论">
+    <p class="kicker">场景 3 · 讨论</p>
+    <h2 class="h2">老改时最该对齐的两问</h2>
+    <div class="grid g2 mt-l">
+      <div class="card card-accent">
+        <h4>题 A</h4>
+        <p class="lede mt-s" style="font-size:18px">没文档时你更信：老员工口述、生产日志，还是代码？怎么交叉验证？</p>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)">
+        <h4>题 B</h4>
+        <p class="lede mt-s" style="font-size:18px">「先表征再改造」会不会太慢？你觉得慢在哪，省在哪？</p>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="mono">场景 3 讨论题</span><span class="slide-number"></span></div>
+    <div class="notes">引导：慢在前置，省在返工和事故；交叉验证至少两源一致。</div>
+  </section>
+
+  <!-- 对照 -->
+  <section class="slide" data-title="对照">
+    <p class="kicker">收束</p>
+    <h2 class="h2">一张表看清三条路</h2>
+    <div class="stack mt-l" style="gap:10px">
+      <div class="card card-accent">
+        <h4>场景 1 新品</h4>
+        <p class="dim">起点：模糊想法 → 先模块化目标态 → 挑战门 → 实现｜禁忌：跳过对齐直接写码</p>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)">
+        <h4>场景 2 续接</h4>
+        <p class="dim">起点：半成品 + 代码 → 现状对照 + 增量目标态 → 挑战门 → 续跑｜禁忌：当白板重写</p>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-3)">
+        <h4>场景 3 老改</h4>
+        <p class="dim">起点：几乎只有代码 → 现状 + 表征 → 目标态 → 挑战门 → 实现｜禁忌：现状当待办</p>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="mono">终点都是：可挑战的目标态 + 反馈环</span><span class="slide-number"></span></div>
+    <div class="notes">用激光笔指「禁忌」列，重复三遍。</div>
+  </section>
+
+  <!-- 地基 -->
+  <section class="slide" data-title="地基">
+    <p class="kicker">共同地基</p>
+    <h2 class="h2">三条路底下，是同一套纪律</h2>
+    <div class="grid g2 mt-l anim-stagger-list" data-anim-target>
+      <div class="card card-accent"><h4>先对齐，再动手</h4><p class="dim">拷问：一次一问，决策归人。</p></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)"><h4>项目要有共同黑话</h4><p class="dim">词表让 AI 少说废话，也少猜概念。</p></div>
+      <div class="card card-accent"><h4>反馈环决定速度</h4><p class="dim">测试驱动 / 表征，决定你敢开多快。</p></div>
+      <div class="card card-accent" style="border-top-color:var(--accent-3)"><h4>小技能组合，决策归人</h4><p class="dim">过门要人确认；别把流程交给黑盒框架。</p></div>
+    </div>
+    <p class="lede mt-l">Matt 那套提供地基；我们仓库按场景提供编排入口。一期先认路，二期再装齐。</p>
+    <div class="deck-footer"><span class="mono">纪律通用，起手式不同</span><span class="slide-number"></span></div>
+    <div class="notes">不要在这里展开技能目录；有人追问再给附录。</div>
+  </section>
+
+  <!-- 带走 -->
+  <section class="slide" data-title="带走">
+    <p class="kicker">请记住</p>
+    <h2 class="h2">带走三句话</h2>
+    <div class="stack mt-l">
+      <div class="agenda-row"><span class="num">1</span><span class="t">先认场景，再选路径</span><span class="d">新品 / 续接 / 老改</span></div>
+      <div class="agenda-row"><span class="num">2</span><span class="t">目标说明没过门，就别急着进实现</span><span class="d">挑战门</span></div>
+      <div class="agenda-row"><span class="num">3</span><span class="t">老系统先忠实描述现状；现状不是待办</span><span class="d">逆向铁律</span></div>
+    </div>
+    <div class="row wrap mt-l" style="gap:8px">
+      <span class="pill pill-accent">二期：装技能与触发</span>
+      <span class="pill">三期：场景 1 实操</span>
+      <span class="pill">四期：场景 3 进阶</span>
+    </div>
+    <div class="deck-footer"><span class="mono">就记这三句</span><span class="slide-number"></span></div>
+    <div class="notes">进入讨论：按场景分组，每组只答一题。</div>
+  </section>
+
+  <!-- 讨论引导 -->
+  <section class="slide" data-title="讨论">
+    <p class="kicker">现场讨论</p>
+    <h2 class="h2">分组：按你最像的场景坐下</h2>
+    <div class="grid g3 mt-l">
+      <div class="card card-accent">
+        <h4>组 1 新品</h4>
+        <p class="dim mt-s">卡在目标、边界，还是验收？下一步最小产物是什么？</p>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-2)">
+        <h4>组 2 续接</h4>
+        <p class="dim mt-s">更怕改坏还是接不上？你们会先补对照表，还是先做表征？</p>
+      </div>
+      <div class="card card-accent" style="border-top-color:var(--accent-3)">
+        <h4>组 3 老改</h4>
+        <p class="dim mt-s">信任源怎么交叉验证？表征范围怎么划到「够用」？</p>
+      </div>
+    </div>
+    <p class="lede mt-l">每组 8 分钟，各派一人讲 1 分钟。分享人只追问：产物是什么？</p>
+    <div class="deck-footer"><span class="mono">讨论落到产物，不落到情绪</span><span class="slide-number"></span></div>
+    <div class="notes">汇报格式：我们场景是… 下一步产物是… 最大风险是…</div>
+  </section>
+
+  <!-- 结束 -->
+  <section class="slide" data-title="结束">
+    <p class="kicker">收尾</p>
+    <h1 class="h1 anim-fade-up" data-anim="fade-up">提效从认清开工状态开始<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">不是从堆技能开始</span></h1>
+    <p class="lede mt-m">新品写清再挑战；续接先摸清再增量；老改先忠实再谈目标。欢迎继续追问：你自己的项目该走哪条。</p>
+    <div class="row wrap mt-l" style="gap:8px">
+      <span class="pill pill-accent">欢迎提问</span>
+      <span class="pill">带项目状态来，别先纠结安装</span>
+    </div>
+    <div class="deck-footer"><span class="mono">谢谢 · 二期见</span><span class="slide-number"></span></div>
+    <div class="notes">答疑优先场景判断；装机类记二期清单。</div>
+  </section>
+
+</div>
+<script src="assets/runtime.js"></script>
+</body>
+</html>
