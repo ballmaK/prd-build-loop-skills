@@ -33,6 +33,7 @@
 
 - External behavior to verify: …
 - Preferred seams: …
+- Journeys that must be proven E2E after grill: … (collected into `docs/prd/e2e-cases.md`)
 
 ## Depends On
 

@@ -15,9 +15,12 @@ If modular To-Be PRD is missing:
 
 If To-Be PRD exists but is not grill-approved yet, run **`/prd-grill`**.
 
+If grill is approved but `docs/prd/e2e-cases.md` is missing / not `ready`, run **`/prd-grill e2e`**.
+
 As-Is only (no To-Be/migrate plan) → do **not** start build-loop yet.
 
 Then invoke **`prd-build-loop`** or **`prd-build-loop continue`** in new Agent sessions.
+After all checkboxes are done, use **`prd-build-loop e2e`** if Phase 4 E2E was skipped.
 
 Optional semi-attended harness:
 
