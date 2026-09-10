@@ -7,8 +7,8 @@ Cursor Agent Skills：**从想法或老代码到模块化 PRD，挑战定稿后�
 ## 两条主路径
 
 ```text
-绿场：想法 → /prd-author → /prd-grill → /prd-build-loop
-棕地：代码 → /prd-reverse（As-Is）→ 表征基线 → To-Be/迁移计划 → /prd-build-loop
+绿场：想法 → /prd-author → /prd-grill（含 E2E 用例）→ /prd-build-loop（实现后跑 E2E）
+棕地：代码 → /prd-reverse（As-Is）→ 表征基线 → To-Be/迁移计划 → /prd-grill → /prd-build-loop
 ```
 
 ## 安装
@@ -67,7 +67,13 @@ npx skills@latest add mattpocock/skills \
 /prd-grill
 ```
 
-通过后写入 `docs/prd/grill-signoff.md`（`status: approved`）。
+通过后写入 `docs/prd/grill-signoff.md`（`status: approved`），并产出 `docs/prd/e2e-cases.md`（`status: ready`）。
+
+若签核已通过但缺 E2E 用例：
+
+```
+/prd-grill e2e
+```
 
 ### D. 挑战通过 → 自动实现
 
@@ -83,14 +89,20 @@ npx skills@latest add mattpocock/skills \
 /prd-build-loop continue
 ```
 
+全部任务勾完后，Phase 4 会按 `e2e-cases.md` **实现并执行** E2E；也可单独：
+
+```
+/prd-build-loop e2e
+```
+
 ## 本仓库技能清单
 
 | Skill | 说明 |
 | ----- | ---- |
 | `prd-author` | **PRD 生成**：grill-with-docs → 合成模块化 `docs/prd/` |
 | `prd-reverse` | **棕地逆向**：代码 → 模块化 As-Is PRD + 忠实度签核 |
-| `prd-grill` | **PRD 挑战门**：对已有 To-Be PRD 再拷问，产出 sign-off |
-| `prd-build-loop` | **主编排**：过门后 PRD → active-plan → 循环实现 |
+| `prd-grill` | **PRD 挑战门**：对已有 To-Be PRD 再拷问，产出 sign-off + **E2E 用例** |
+| `prd-build-loop` | **主编排**：过门后 PRD → active-plan → 循环实现 → **跑 E2E** |
 | `ralph-init` | 初始化 specs/、prompts/、ralph.sh |
 | `ralph-implement` | 单次执行一个 checkbox 任务 |
 | `ralph-loop` | 外层循环控制与续跑指引 |

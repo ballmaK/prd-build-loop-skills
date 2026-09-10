@@ -9,6 +9,7 @@
 | Macro / shared | `docs/prd/00-macro-shared.md` |
 | Modules | `docs/prd/modules/` |
 | Grill sign-off | `docs/prd/grill-signoff.md` |
+| E2E cases (after grill) | `docs/prd/e2e-cases.md` |
 
 ## Recommended development order
 

@@ -24,3 +24,4 @@ date: YYYY-MM-DD
 
 - [ ] User confirmed shared understanding
 - [ ] `status: approved` set above
+- [ ] E2E cases drafted in `docs/prd/e2e-cases.md` (`status: ready`)

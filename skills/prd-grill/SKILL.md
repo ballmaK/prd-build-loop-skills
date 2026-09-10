@@ -2,9 +2,9 @@
 name: prd-grill
 description: >-
   Stress-test modular PRD under docs/prd/ with grill-me/grilling discipline until
-  shared understanding and a grill sign-off. Use when user says /prd-grill,
-  wants to challenge/finalize PRD before build, or prd-build-loop blocks on
-  missing grill-signoff.
+  shared understanding, grill sign-off, and PRD-derived E2E cases. Use when user
+  says /prd-grill, wants to challenge/finalize PRD before build, or
+  prd-build-loop blocks on missing grill-signoff / e2e-cases.
 disable-model-invocation: true
 ---
 
@@ -58,6 +58,7 @@ Use these branches as the agenda — still **one question at a time**, not a dum
 6. **Development order** — prerequisites, what can parallelize, what must serialize
 7. **Risks & unknowns** — auth, migrations, external systems, launch constraints
 8. **Definition of done** — task / module / release bars for the coming build loop
+9. **E2E journey candidates** — which AC must be proven end-to-end (vs unit-only)
 
 When a gap is found, prefer: **recommend a concrete PRD edit** → wait for user OK → apply minimal edit to the relevant `docs/prd/**` file → continue grilling.
 
@@ -69,7 +70,7 @@ Only after the user **explicitly confirms** shared understanding:
 
 1. Create or update `docs/prd/grill-signoff.md` from the template shape below (or copy from skill templates if present in the installed package).
 2. Summarize resolved decisions and remaining accepted risks.
-3. Tell the user they can run `/prd-build-loop` next.
+3. Proceed to **Phase 3** (E2E cases) before telling the user build-loop is ready.
 
 ### Sign-off file requirements
 
@@ -83,7 +84,40 @@ Must include:
 - Pointers to PRD paths that were updated (if any)
 - Explicit line: `status: approved`
 
-If the user declines approval, leave no `approved` sign-off (or set `status: draft`) and **STOP**.
+If the user declines approval, leave no `approved` sign-off (or set `status: draft`) and **STOP**. Do not write E2E cases until approved.
+
+---
+
+## Phase 3 — Author E2E cases from PRD
+
+**Required after** `grill-signoff` is `approved`. Still **no product implementation**.
+
+1. Copy `templates/docs/prd/e2e-cases.md` → `docs/prd/e2e-cases.md` if missing.
+2. Walk each module PRD’s acceptance criteria and macro critical journeys.
+3. Emit concrete E2E cases:
+   - One case = one user-visible journey
+   - Map to source AC / module path
+   - Steps + expected results must be externally observable
+   - Mark `Automation: pending`
+4. Prefer **P0 journeys first**; list explicit deferrals for AC that stay unit-only.
+5. Set YAML `status: ready` when the coverage checklist is honest (deferrals allowed if listed).
+6. Tick the E2E checkbox on `grill-signoff.md`.
+
+### Quality bar
+
+- Vague AC (“works correctly”) → fix the PRD or refine the case before `ready`
+- No silent skips: every P0 AC maps to a case **or** a deferred row
+- Do not invent features that are not in the PRD
+
+### Handoff line
+
+Tell the user next steps:
+
+```
+/prd-build-loop
+```
+
+Build-loop will implement tasks with TDD, then in Phase 4 automate/run these E2E cases.
 
 ---
 
@@ -94,6 +128,12 @@ If the user declines approval, leave no `approved` sign-off (or set `status: dra
 ```
 
 Continue the decision tree from the last unresolved branch; do not re-ask settled questions unless the user changed the PRD.
+
+If sign-off is already `approved` but `docs/prd/e2e-cases.md` is missing or `draft`, resume at **Phase 3** only:
+
+```
+/prd-grill e2e
+```
 
 ---
 
